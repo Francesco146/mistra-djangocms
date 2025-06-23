@@ -83,6 +83,8 @@ INSTALLED_APPS = [
     'djangocms_frontend.contrib.image',
     'djangocms_frontend.contrib.tabs',
     'djangocms_frontend.contrib.utilities',
+
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +102,11 @@ MIDDLEWARE = [
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # oppure usa CORS_ALLOWED_ORIGINS per maggiore sicurezza
 
 ROOT_URLCONF = 'urls'
 
