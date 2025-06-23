@@ -1,41 +1,59 @@
 services:
   web:
-    # the application's web service (container) will use an image based on our Dockerfile
-    build: .
-    # map the internal port 80 to port 8000 on the host
+    # Backend Django: builda l'immagine dalla cartella backend
+    build: ./backend
+    # Mappa la porta 80 del container alla porta 8000 dell'host
     ports:
       - "8000:80"
-    # map the host directory to app (which allows us to see and edit files inside the container)
+    # Sincronizza la cartella backend con /app nel container (lettura/scrittura)
     volumes:
-      - ".:/app:rw"
+      - "./backend:/app:rw"
       - "./data:/data:rw"
-    # the default command to run whenever the container is launched
+    # Comando per avviare il server Django all'indirizzo 0.0.0.0:80
     command: python manage.py runserver 0.0.0.0:80
-    # the URL 'postgres' or 'mysql' will point to the application's db service
+    networks:
+      - djangocmsnet
+    # File con variabili d'ambiente per Django
+    env_file: .env-local
+
+  frontend:
+    # Frontend React (Vite): builda l'immagine dalla cartella frontend/quiz
+    build: ./frontend/quiz
+    # Mappa la porta 3000 del container (Vite default) alla 3000 dell'host
+    ports:
+      - "3000:3000"
+    # Sincronizza il codice sorgente del frontend
+    volumes:
+      - "./frontend/quiz:/app"
+      # Evita conflitti con node_modules: non sincronizziamo questa cartella
+      - /app/node_modules
+    # Comando per avviare il dev server di Vite
+    command: npm run dev
     networks:
       - djangocmsnet
 
-    env_file: .env-local
-
   database_default:
-    # Select one of the following db configurations for the database
+    # Database PostgreSQL: usa l'immagine ufficiale postgres 15 alpine
     image: postgres:15-alpine
+    # Espone la porta 5432 per il database (variabile DB_PORT opzionale)
     ports:
-      - "${DB_PORT-}:5432/tcp"  # allow your local dev env to connect to the db if variable set
+      - "${DB_PORT-}:5432/tcp"
     environment:
+      # Imposta nome db, password e metodo di autenticazione
       POSTGRES_DB: "db"
       POSTGRES_PASSWORD: "password"
       POSTGRES_HOST_AUTH_METHOD: "trust"
       SERVICE_MANAGER: "fsm-postgres"
-
     networks:
       - djangocmsnet
-
+    # Volume per persistenza dati database
     volumes:
-       - postgres-data:/var/lib/postgresql/data/
+      - postgres-data:/var/lib/postgresql/data/
 
 networks:
+  # Network condivisa tra i container
   djangocmsnet:
 
 volumes:
+  # Volume per i dati persistenti del database
   postgres-data:

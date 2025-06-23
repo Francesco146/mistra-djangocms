@@ -4,7 +4,7 @@ import dj_database_url
 from django_storage_url import dsn_configured_storage_class
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -26,9 +26,8 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Application definition
 
 INSTALLED_APPS = [
-    'backend',
     
-    'backend.appQuiz',
+    'appQuiz',
     'rest_framework',
 
     # optional, but used in most projects
@@ -103,7 +102,7 @@ MIDDLEWARE = [
     'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -147,8 +146,7 @@ CMS_TEMPLATES = [
     ('whitenoise-static-files-demo.html', 'Static File Demo'),
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
-
+WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -201,7 +199,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_DIRS = [  # this are were django staticfiles is looking for sources
-    BASE_DIR / "backend" / "static",
+    BASE_DIR / "static",
 ]
 
 STATIC_URL = '/static/'
@@ -214,11 +212,10 @@ DefaultStorageClass = dsn_configured_storage_class('DEFAULT_STORAGE_DSN')
 
 STORAGES = {
     'default': {
-        'BACKEND': 'backend.settings.DefaultStorageClass',
+        'BACKEND': 'settings.DefaultStorageClass',
     },
     'staticfiles': {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-        # 'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
     },
 }
 

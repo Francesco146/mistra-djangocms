@@ -5,7 +5,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('backend.appQuiz.urls')),  # API per viste 
+    path('api/', include('appQuiz.urls')),  # API per viste 
 ]
 
 if settings.DEBUG:
