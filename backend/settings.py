@@ -28,7 +28,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 INSTALLED_APPS = [
     'backend',
     
-    'backend.model',
+    'backend.appQuiz',
     'rest_framework',
 
     # optional, but used in most projects
