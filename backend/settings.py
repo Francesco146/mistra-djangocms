@@ -27,6 +27,9 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 INSTALLED_APPS = [
     'backend',
+    
+    'backend.model',
+    'rest_framework',
 
     # optional, but used in most projects
     'djangocms_admin_style',
