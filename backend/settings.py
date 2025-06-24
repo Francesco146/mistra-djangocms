@@ -26,7 +26,8 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Application definition
 
 INSTALLED_APPS = [
-    
+    'cms_templates',
+
     'appQuiz',
     'rest_framework',
 
@@ -112,7 +113,7 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ str(BASE_DIR) + "/templates"],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -198,7 +199,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_DIRS = [  # this are were django staticfiles is looking for sources
+# where django staticfiles looks for sources in addition to /static for individual modules
+STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 

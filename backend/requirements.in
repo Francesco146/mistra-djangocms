@@ -33,3 +33,5 @@ pip-tools  # needed for compilation of this file into requirements.txt, see star
 djangorestframework # needed for views
 
 django-ckeditor>=6.7.0
+
+django-cors-headers
