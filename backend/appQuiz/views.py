@@ -13,3 +13,7 @@ class TestViewSet(viewsets.ModelViewSet):
 class TestExecutionViewSet(viewsets.ModelViewSet):
     queryset = TestExecution.objects.all()
     serializer_class = TestExecutionSerializer
+
+class SexViewSet(viewsets.ReadOnlyModelViewSet):  # solo GET (list, retrieve)
+    queryset = Sex.objects.all()
+    serializer_class = SexSerializer

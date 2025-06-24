@@ -11,7 +11,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['id', 'name', 'text', 'category', 'answers']
+        fields = ['id', 'name', 'text', 'id_category', 'answers']
 
 class TestSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True, read_only=True)
@@ -23,4 +23,9 @@ class TestSerializer(serializers.ModelSerializer):
 class TestExecutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestExecution
+        fields = '__all__'
+
+class SexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sex
         fields = '__all__'
