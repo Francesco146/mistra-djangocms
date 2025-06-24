@@ -52,9 +52,6 @@ INSTALLED_APPS = [
     'filer',
     'easy_thumbnails',
 
-    # the default publishing implementation - optional, but used in most projects
-    'djangocms_versioning',
-
     # the default alias content - optional, but used in most projects
     'djangocms_alias',
     'parler',
@@ -237,4 +234,3 @@ SITE_ID = 1
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 CMS_CONFIRM_VERSION4 = True
-DJANGOCMS_VERSIONING_ALLOW_DELETING_VERSIONS = True
