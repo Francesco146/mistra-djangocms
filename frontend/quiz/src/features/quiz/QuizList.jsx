@@ -1,37 +1,58 @@
-// src/components/QuizList.jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import "../../styles/QuizList.css";
 
 function QuizList() {
-  const [tests, setTests] = useState([]);
-  const [loading, setLoading] = useState(true);
+    const [tests, setTests] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('http://localhost:8000/api/tests/')
-      .then(response => response.json())
-      .then(data => {
-        setTests(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Errore nel fetch dei test:', error);
-        setLoading(false);
-      });
-  }, []);
+    useEffect(() => {
+        fetch("http://localhost:8000/api/tests/")
+            .then((res) => res.json())
+            .then((data) => {
+                setTests(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error("Fetch tests error:", err);
+                setLoading(false);
+            });
+    }, []);
 
-  if (loading) return <p>Caricamento...</p>;
+    return (
+        <main
+            className="quiz-container"
+            aria-busy={loading}
+            aria-live="polite"
+        >
+            <h1 className="quiz-title">Quiz Disponibili</h1>
 
-  return (
-    <div>
-      <h1>Quiz disponibili</h1>
-      <ul>
-        {tests.map(test => (
-          <li key={test.id}>
-            <strong>{test.name}</strong>: {test.description}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+            {loading ? (
+                <div role="status">
+                    <div className="loading" aria-hidden="true"></div>
+                    <span className="sr-only">
+                        Caricamento dei quiz in corso…
+                    </span>
+                </div>
+            ) : (
+                <ul className="quiz-list">
+                    {tests.map((test) => (
+                        <li className="quiz-card" key={test.id}>
+                            <h2 className="quiz-name">{test.name}</h2>
+                            <p className="quiz-description">
+                                {test.description}
+                            </p>
+                            <button
+                                className="quiz-button"
+                                aria-label={`Inizia il quiz ${test.name}`}
+                            >
+                                Inizia
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </main>
+    );
 }
 
 export default QuizList;
