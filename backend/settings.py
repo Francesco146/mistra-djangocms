@@ -84,7 +84,9 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
-    "ckeditor",
+    'ckeditor',
+
+    'django_vite',
 ]
 
 MIDDLEWARE = [
@@ -231,3 +233,9 @@ SITE_ID = 1
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 CMS_CONFIRM_VERSION4 = True
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": True,
+    }
+}
