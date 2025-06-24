@@ -2,7 +2,6 @@
 # pip-compile -U --resolver=backtracking
 
 boto3
-psycopg2
 uwsgi
 
 django<=6

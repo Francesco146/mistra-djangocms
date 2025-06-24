@@ -32,28 +32,6 @@ services:
     networks:
       - djangocmsnet
 
-  database_default:
-    # Database PostgreSQL: usa l'immagine ufficiale postgres 15 alpine
-    image: postgres:15-alpine
-    # Espone la porta 5432 per il database (variabile DB_PORT opzionale)
-    ports:
-      - "${DB_PORT-}:5432/tcp"
-    environment:
-      # Imposta nome db, password e metodo di autenticazione
-      POSTGRES_DB: "db"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
-      SERVICE_MANAGER: "fsm-postgres"
-    networks:
-      - djangocmsnet
-    # Volume per persistenza dati database
-    volumes:
-      - postgres-data:/var/lib/postgresql/data/
-
 networks:
   # Network condivisa tra i container
   djangocmsnet:
-
-volumes:
-  # Volume per i dati persistenti del database
-  postgres-data:
