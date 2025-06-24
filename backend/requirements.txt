@@ -175,3 +175,5 @@ whitenoise==6.9.0
 # setuptools
 
 django-cors-headers
+
+django-ckeditor

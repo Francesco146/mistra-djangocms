@@ -1,4 +1,5 @@
 from django.db import models 
+from ckeditor.fields import RichTextField
 
 # Category (*id,nome)
 class Category(models.Model):
@@ -7,7 +8,7 @@ class Category(models.Model):
 # Question (*id,name,text,id_category)
 class Question(models.Model):
     name = models.CharField(max_length=255)
-    text = models.TextField() # Contenuto HTML 
+    text = RichTextField() # Contenuto HTML 
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 # Answer(*id,text,score,correction,id_question)

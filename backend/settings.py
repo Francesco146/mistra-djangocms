@@ -85,6 +85,8 @@ INSTALLED_APPS = [
     'djangocms_frontend.contrib.utilities',
 
     'corsheaders',
+
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
