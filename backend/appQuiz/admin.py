@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, Question, Answer
+from .models import Test, Question, Answer, Category
 
 class AnswerInline(admin.TabularInline):
     model = Answer
@@ -7,6 +7,10 @@ class AnswerInline(admin.TabularInline):
 
 class QuestionInline(admin.TabularInline):
     model = Test.questions.through  # la relazione ManyToMany di Test->Question
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    ...
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
