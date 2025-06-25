@@ -26,7 +26,12 @@ function QuizPage() {
         setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
 
     return (
-        <main className="quiz-container" aria-busy={loading} aria-live="polite">
+        <main
+            className="quiz-container"
+            style={{ display: "flex" }}
+            aria-busy={loading}
+            aria-live="polite"
+        >
             {loading ? (
                 <div role="status">
                     <div className="loading" aria-hidden="true"></div>
