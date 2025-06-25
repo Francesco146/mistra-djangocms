@@ -1,0 +1,88 @@
+[
+    {
+        "model": "appQuiz.category",
+        "pk": 1,
+        "fields": {
+            "name": "Geografia"
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 1,
+        "fields": {
+            "name": "Capitale d'Italia",
+            "text": "Qual'è la capitale d'Italia?",
+            "id_category": 1
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 1,
+        "fields": {
+            "name": "Roma",
+            "text": "Roma",
+            "score": 1,
+            "id_question": 1
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 2,
+        "fields": {
+            "name": "Milano",
+            "text": "Milano",
+            "score": 0,
+            "id_question": 1
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 1,
+        "fields": {
+            "name": "Test di Geografia",
+            "description": "Un test base sulla geografia italiana",
+            "min_score": 0.5,
+            "questions": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 2,
+        "fields": {
+            "name": "Test di Storia",
+            "description": "Un test base sulla storia italiana",
+            "min_score": 0.5,
+            "questions": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 3,
+        "fields": {
+            "name": "Test di Matematica",
+            "description": "Un test base sulla matematica italiana",
+            "min_score": 0.5,
+            "questions": [
+                1
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 4,
+        "fields": {
+            "name": "Test di Scienze",
+            "description": "Un test base sulle scienze italiane",
+            "min_score": 0.5,
+            "questions": [
+                1
+            ]
+        }
+    }
+]
