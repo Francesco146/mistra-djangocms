@@ -1,9 +1,550 @@
 [
     {
         "model": "appQuiz.category",
+        "pk": 5,
+        "fields": {
+            "name": "Letteratura"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 6,
+        "fields": {
+            "name": "Arte"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 7,
+        "fields": {
+            "name": "Musica"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 8,
+        "fields": {
+            "name": "Informatica"
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 15,
+        "fields": {
+            "name": "Autore Divina Commedia",
+            "text": "Chi ha scritto 'La Divina Commedia'?",
+            "id_category": 5
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 29,
+        "fields": {
+            "name": "Dante Alighieri",
+            "text": "Dante Alighieri",
+            "score": 1,
+            "correction": "Dante Alighieri è l'autore de 'La Divina Commedia'.",
+            "id_question": 15
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 30,
+        "fields": {
+            "name": "Giovanni Boccaccio",
+            "text": "Giovanni Boccaccio",
+            "score": 0,
+            "correction": "Giovanni Boccaccio non ha scritto 'La Divina Commedia'.",
+            "id_question": 15
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 16,
+        "fields": {
+            "name": "Autore Nome della Rosa",
+            "text": "Chi è l'autore de 'Il nome della rosa'?",
+            "id_category": 5
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 31,
+        "fields": {
+            "name": "Umberto Eco",
+            "text": "Umberto Eco",
+            "score": 1,
+            "correction": "Umberto Eco è l'autore de 'Il nome della rosa'.",
+            "id_question": 16
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 32,
+        "fields": {
+            "name": "Italo Calvino",
+            "text": "Italo Calvino",
+            "score": 0,
+            "correction": "Italo Calvino non ha scritto 'Il nome della rosa'.",
+            "id_question": 16
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 17,
+        "fields": {
+            "name": "Opera più famosa Calvino",
+            "text": "Qual è l'opera più famosa di Italo Calvino?",
+            "id_category": 5
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 33,
+        "fields": {
+            "name": "Il barone rampante",
+            "text": "Il barone rampante",
+            "score": 1,
+            "correction": "'Il barone rampante' è una delle opere più celebri di Italo Calvino.",
+            "id_question": 17
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 34,
+        "fields": {
+            "name": "Se una notte d'inverno un viaggiatore",
+            "text": "Se una notte d'inverno un viaggiatore",
+            "score": 0,
+            "correction": "'Se una notte d'inverno un viaggiatore' è un'opera di Calvino, ma non la più frequentemente citata in questo contesto.",
+            "id_question": 17
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 18,
+        "fields": {
+            "name": "Autore I promessi sposi",
+            "text": "'I promessi sposi' è un'opera di quale autore?",
+            "id_category": 5
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 35,
+        "fields": {
+            "name": "Alessandro Manzoni",
+            "text": "Alessandro Manzoni",
+            "score": 1,
+            "correction": "Alessandro Manzoni è l'autore de 'I promessi sposi'.",
+            "id_question": 18
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 36,
+        "fields": {
+            "name": "Giovanni Verga",
+            "text": "Giovanni Verga",
+            "score": 0,
+            "correction": "Giovanni Verga non ha scritto 'I promessi sposi'.",
+            "id_question": 18
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 19,
+        "fields": {
+            "name": "Autore Gioconda",
+            "text": "Chi dipinse la Gioconda?",
+            "id_category": 6
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 37,
+        "fields": {
+            "name": "Leonardo da Vinci",
+            "text": "Leonardo da Vinci",
+            "score": 1,
+            "correction": "Leonardo da Vinci dipinse la Gioconda.",
+            "id_question": 19
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 38,
+        "fields": {
+            "name": "Michelangelo Buonarroti",
+            "text": "Michelangelo Buonarroti",
+            "score": 0,
+            "correction": "Michelangelo Buonarroti non dipinse la Gioconda.",
+            "id_question": 19
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 20,
+        "fields": {
+            "name": "Scultore del David",
+            "text": "Chi scolpì il David?",
+            "id_category": 6
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 39,
+        "fields": {
+            "name": "Michelangelo Buonarroti",
+            "text": "Michelangelo Buonarroti",
+            "score": 1,
+            "correction": "Michelangelo Buonarroti scolpì il David.",
+            "id_question": 20
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 40,
+        "fields": {
+            "name": "Donatello",
+            "text": "Donatello",
+            "score": 0,
+            "correction": "Donatello non scolpì il David in marmo di Michelangelo.",
+            "id_question": 20
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 21,
+        "fields": {
+            "name": "Movimento drammatico luci ombre",
+            "text": "Quale movimento artistico è caratterizzato dall'uso drammatico di luci e ombre?",
+            "id_category": 6
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 41,
+        "fields": {
+            "name": "Barocco",
+            "text": "Barocco",
+            "score": 1,
+            "correction": "Il Barocco è noto per l'uso drammatico di luci e ombre.",
+            "id_question": 21
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 42,
+        "fields": {
+            "name": "Rinascimento",
+            "text": "Rinascimento",
+            "score": 0,
+            "correction": "Il Rinascimento non enfatizzava in modo drammatico luci e ombre.",
+            "id_question": 21
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 22,
+        "fields": {
+            "name": "Autore Scuola di Atene",
+            "text": "Chi dipinse 'La Scuola di Atene'?",
+            "id_category": 6
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 43,
+        "fields": {
+            "name": "Raffaello Sanzio",
+            "text": "Raffaello Sanzio",
+            "score": 1,
+            "correction": "Raffaello Sanzio dipinse 'La Scuola di Atene'.",
+            "id_question": 22
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 44,
+        "fields": {
+            "name": "Caravaggio",
+            "text": "Caravaggio",
+            "score": 0,
+            "correction": "Caravaggio non dipinse 'La Scuola di Atene'.",
+            "id_question": 22
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 23,
+        "fields": {
+            "name": "Compositore Nona Sinfonia",
+            "text": "Chi compose la Nona Sinfonia?",
+            "id_category": 7
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 45,
+        "fields": {
+            "name": "Ludwig van Beethoven",
+            "text": "Ludwig van Beethoven",
+            "score": 1,
+            "correction": "Beethoven compose la Nona Sinfonia.",
+            "id_question": 23
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 46,
+        "fields": {
+            "name": "Wolfgang Amadeus Mozart",
+            "text": "Wolfgang Amadeus Mozart",
+            "score": 0,
+            "correction": "Mozart non compose la Nona Sinfonia.",
+            "id_question": 23
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 24,
+        "fields": {
+            "name": "Corde chitarra standard",
+            "text": "Quante corde ha una chitarra standard?",
+            "id_category": 7
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 47,
+        "fields": {
+            "name": "Sei",
+            "text": "Sei",
+            "score": 1,
+            "correction": "Una chitarra standard ha sei corde.",
+            "id_question": 24
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 48,
+        "fields": {
+            "name": "Quattro",
+            "text": "Quattro",
+            "score": 0,
+            "correction": "Un violino ha quattro corde, non sei.",
+            "id_question": 24
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 25,
+        "fields": {
+            "name": "Autore Nozze di Figaro",
+            "text": "Chi scrisse l'opera 'Le nozze di Figaro'?",
+            "id_category": 7
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 49,
+        "fields": {
+            "name": "Wolfgang Amadeus Mozart",
+            "text": "Wolfgang Amadeus Mozart",
+            "score": 1,
+            "correction": "Mozart scrisse 'Le nozze di Figaro'.",
+            "id_question": 25
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 50,
+        "fields": {
+            "name": "Giacomo Puccini",
+            "text": "Giacomo Puccini",
+            "score": 0,
+            "correction": "Puccini non scrisse 'Le nozze di Figaro'.",
+            "id_question": 25
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 26,
+        "fields": {
+            "name": "Significato CPU",
+            "text": "Cosa significa 'CPU' in informatica?",
+            "id_category": 8
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 51,
+        "fields": {
+            "name": "Central Processing Unit",
+            "text": "Central Processing Unit",
+            "score": 1,
+            "correction": "CPU significa Central Processing Unit.",
+            "id_question": 26
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 52,
+        "fields": {
+            "name": "Computer Processing Unit",
+            "text": "Computer Processing Unit",
+            "score": 0,
+            "correction": "Computer Processing Unit non è l'acronimo corretto.",
+            "id_question": 26
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 27,
+        "fields": {
+            "name": "Linguaggio client-side",
+            "text": "Quale linguaggio è principalmente usato per il lato client nel web?",
+            "id_category": 8
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 53,
+        "fields": {
+            "name": "JavaScript",
+            "text": "JavaScript",
+            "score": 1,
+            "correction": "JavaScript è usato principalmente per il client-side nel web.",
+            "id_question": 27
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 54,
+        "fields": {
+            "name": "Python",
+            "text": "Python",
+            "score": 0,
+            "correction": "Python è più usato lato server, non lato client.",
+            "id_question": 27
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 28,
+        "fields": {
+            "name": "Azienda Windows",
+            "text": "Quale azienda ha sviluppato Windows?",
+            "id_category": 8
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 55,
+        "fields": {
+            "name": "Microsoft",
+            "text": "Microsoft",
+            "score": 1,
+            "correction": "Windows è stato sviluppato da Microsoft.",
+            "id_question": 28
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 56,
+        "fields": {
+            "name": "Apple",
+            "text": "Apple",
+            "score": 0,
+            "correction": "Apple non ha sviluppato Windows.",
+            "id_question": 28
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 5,
+        "fields": {
+            "name": "Test di Letteratura",
+            "description": "Un test base sulla letteratura italiana",
+            "min_score": 0.5,
+            "questions": [
+                15,
+                16,
+                17,
+                18
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 6,
+        "fields": {
+            "name": "Test di Arte",
+            "description": "Un test base sull'arte",
+            "min_score": 0.5,
+            "questions": [
+                19,
+                20,
+                21,
+                22
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 7,
+        "fields": {
+            "name": "Test di Musica",
+            "description": "Un test base sulla musica",
+            "min_score": 0.5,
+            "questions": [
+                23,
+                24,
+                25
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.test",
+        "pk": 8,
+        "fields": {
+            "name": "Test di Informatica",
+            "description": "Un test base sull'informatica",
+            "min_score": 0.5,
+            "questions": [
+                26,
+                27,
+                28
+            ]
+        }
+    },
+    {
+        "model": "appQuiz.category",
         "pk": 1,
         "fields": {
             "name": "Geografia"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 2,
+        "fields": {
+            "name": "Storia"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 3,
+        "fields": {
+            "name": "Matematica"
+        }
+    },
+    {
+        "model": "appQuiz.category",
+        "pk": 4,
+        "fields": {
+            "name": "Scienze"
         }
     },
     {
@@ -38,6 +579,409 @@
         }
     },
     {
+        "model": "appQuiz.question",
+        "pk": 2,
+        "fields": {
+            "name": "Fiume più lungo d'Italia",
+            "text": "Qual è il fiume più lungo d'Italia?",
+            "id_category": 1
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 3,
+        "fields": {
+            "name": "Po",
+            "text": "Po",
+            "score": 1,
+            "correction": "Il Po è il fiume più lungo d'Italia.",
+            "id_question": 2
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 4,
+        "fields": {
+            "name": "Tevere",
+            "text": "Tevere",
+            "score": 0,
+            "correction": "Il Tevere non è il fiume più lungo d'Italia.",
+            "id_question": 2
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 3,
+        "fields": {
+            "name": "Proclamazione Regno d'Italia",
+            "text": "In che anno è avvenuta la proclamazione del Regno d'Italia?",
+            "id_category": 2
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 5,
+        "fields": {
+            "name": "1861",
+            "text": "1861",
+            "score": 1,
+            "correction": "Il Regno d'Italia fu proclamato nel 1861.",
+            "id_question": 3
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 6,
+        "fields": {
+            "name": "1871",
+            "text": "1871",
+            "score": 0,
+            "correction": "1871 è l'anno in cui Roma divenne capitale, non la proclamazione del Regno.",
+            "id_question": 3
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 4,
+        "fields": {
+            "name": "Fine Seconda Guerra Mondiale",
+            "text": "In quale anno è terminata la Seconda Guerra Mondiale?",
+            "id_category": 2
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 7,
+        "fields": {
+            "name": "1945",
+            "text": "1945",
+            "score": 1,
+            "correction": "La Seconda Guerra Mondiale terminò nel 1945.",
+            "id_question": 4
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 8,
+        "fields": {
+            "name": "1939",
+            "text": "1939",
+            "score": 0,
+            "correction": "1939 è l'anno d'inizio della guerra, non della sua fine.",
+            "id_question": 4
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 5,
+        "fields": {
+            "name": "Somma 7+8",
+            "text": "Quanto fa 7 + 8?",
+            "id_category": 3
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 9,
+        "fields": {
+            "name": "15",
+            "text": "15",
+            "score": 1,
+            "correction": "7 + 8 = 15.",
+            "id_question": 5
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 10,
+        "fields": {
+            "name": "14",
+            "text": "14",
+            "score": 0,
+            "correction": "7 + 8 non fa 14.",
+            "id_question": 5
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 6,
+        "fields": {
+            "name": "Fotosintesi",
+            "text": "Quale processo permette alle piante di produrre ossigeno?",
+            "id_category": 4
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 11,
+        "fields": {
+            "name": "Fotosintesi",
+            "text": "Fotosintesi",
+            "score": 1,
+            "correction": "Le piante producono ossigeno tramite la fotosintesi.",
+            "id_question": 6
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 12,
+        "fields": {
+            "name": "Respirazione",
+            "text": "Respirazione",
+            "score": 0,
+            "correction": "La respirazione non produce ossigeno, bensì lo consuma.",
+            "id_question": 6
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 7,
+        "fields": {
+            "name": "Montagna più alta d'Italia",
+            "text": "Qual è la montagna più alta d'Italia?",
+            "id_category": 1
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 13,
+        "fields": {
+            "name": "Monte Bianco",
+            "text": "Monte Bianco",
+            "score": 1,
+            "correction": "Il Monte Bianco è la vetta più alta d'Italia.",
+            "id_question": 7
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 14,
+        "fields": {
+            "name": "Monte Rosa",
+            "text": "Monte Rosa",
+            "score": 0,
+            "correction": "Il Monte Rosa non è la vetta più alta d'Italia.",
+            "id_question": 7
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 8,
+        "fields": {
+            "name": "Mare costa orientale",
+            "text": "Qual è il mare che bagna la costa orientale dell'Italia?",
+            "id_category": 1
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 15,
+        "fields": {
+            "name": "Adriatico",
+            "text": "Adriatico",
+            "score": 1,
+            "correction": "Il Mar Adriatico bagna la costa orientale dell'Italia.",
+            "id_question": 8
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 16,
+        "fields": {
+            "name": "Tirreno",
+            "text": "Tirreno",
+            "score": 0,
+            "correction": "Il Mar Tirreno bagna la costa occidentale, non quella orientale.",
+            "id_question": 8
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 9,
+        "fields": {
+            "name": "Nascita Repubblica Italiana",
+            "text": "In che anno è nata la Repubblica Italiana?",
+            "id_category": 2
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 17,
+        "fields": {
+            "name": "1946",
+            "text": "1946",
+            "score": 1,
+            "correction": "La Repubblica Italiana è nata nel 1946.",
+            "id_question": 9
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 18,
+        "fields": {
+            "name": "1948",
+            "text": "1948",
+            "score": 0,
+            "correction": "1948 è l'anno della prima legislatura repubblicana, non della nascita della Repubblica.",
+            "id_question": 9
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 10,
+        "fields": {
+            "name": "Padre della Patria",
+            "text": "Chi è considerato il Padre della Patria italiana?",
+            "id_category": 2
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 19,
+        "fields": {
+            "name": "Giuseppe Garibaldi",
+            "text": "Giuseppe Garibaldi",
+            "score": 1,
+            "correction": "Giuseppe Garibaldi è spesso chiamato Padre della Patria.",
+            "id_question": 10
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 20,
+        "fields": {
+            "name": "Camillo Benso di Cavour",
+            "text": "Camillo Benso di Cavour",
+            "score": 0,
+            "correction": "Cavour fu protagonista del Risorgimento ma non è definito Padre della Patria.",
+            "id_question": 10
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 11,
+        "fields": {
+            "name": "Moltiplicazione 9×6",
+            "text": "Quanto fa 9 × 6?",
+            "id_category": 3
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 21,
+        "fields": {
+            "name": "54",
+            "text": "54",
+            "score": 1,
+            "correction": "9 × 6 = 54.",
+            "id_question": 11
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 22,
+        "fields": {
+            "name": "42",
+            "text": "42",
+            "score": 0,
+            "correction": "9 × 6 non fa 42.",
+            "id_question": 11
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 12,
+        "fields": {
+            "name": "Radice quadrata di 81",
+            "text": "Qual è la radice quadrata di 81?",
+            "id_category": 3
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 23,
+        "fields": {
+            "name": "9",
+            "text": "9",
+            "score": 1,
+            "correction": "√81 = 9.",
+            "id_question": 12
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 24,
+        "fields": {
+            "name": "8",
+            "text": "8",
+            "score": 0,
+            "correction": "√81 non è 8.",
+            "id_question": 12
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 13,
+        "fields": {
+            "name": "Composizione nucleo atomico",
+            "text": "Di che cosa è composto principalmente il nucleo di un atomo?",
+            "id_category": 4
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 25,
+        "fields": {
+            "name": "Protoni e neutroni",
+            "text": "Protoni e neutroni",
+            "score": 1,
+            "correction": "Il nucleo atomico è formato da protoni e neutroni.",
+            "id_question": 13
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 26,
+        "fields": {
+            "name": "Elettroni",
+            "text": "Elettroni",
+            "score": 0,
+            "correction": "Gli elettroni orbitano attorno al nucleo, non ne fanno parte.",
+            "id_question": 13
+        }
+    },
+    {
+        "model": "appQuiz.question",
+        "pk": 14,
+        "fields": {
+            "name": "Formula chimica acqua",
+            "text": "Qual è la formula chimica dell'acqua?",
+            "id_category": 4
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 27,
+        "fields": {
+            "name": "H2O",
+            "text": "H2O",
+            "score": 1,
+            "correction": "La formula chimica dell'acqua è H₂O.",
+            "id_question": 14
+        }
+    },
+    {
+        "model": "appQuiz.answer",
+        "pk": 28,
+        "fields": {
+            "name": "CO2",
+            "text": "CO2",
+            "score": 0,
+            "correction": "CO₂ è la formula del biossido di carbonio, non dell'acqua.",
+            "id_question": 14
+        }
+    },
+    {
         "model": "appQuiz.test",
         "pk": 1,
         "fields": {
@@ -46,7 +990,9 @@
             "min_score": 0.5,
             "questions": [
                 1,
-                2
+                2,
+                7,
+                8
             ]
         }
     },
@@ -58,8 +1004,10 @@
             "description": "Un test base sulla storia italiana",
             "min_score": 0.5,
             "questions": [
-                1,
-                2
+                3,
+                4,
+                9,
+                10
             ]
         }
     },
@@ -71,7 +1019,9 @@
             "description": "Un test base sulla matematica italiana",
             "min_score": 0.5,
             "questions": [
-                1
+                5,
+                11,
+                12
             ]
         }
     },
@@ -83,7 +1033,9 @@
             "description": "Un test base sulle scienze italiane",
             "min_score": 0.5,
             "questions": [
-                1
+                6,
+                13,
+                14
             ]
         }
     }
