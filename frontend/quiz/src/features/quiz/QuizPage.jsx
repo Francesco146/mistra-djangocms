@@ -1,31 +1,11 @@
 import DomPurify from "dompurify";
 import { useEffect, useState } from "react";
-import "../../styles/QuizList.css";
+import "../../styles/QuizPage.css";
 
-/*
-{
-    "id": 1,
-    "name": "Test di Geografia",
-    "description": "Un test base sulla geografia italiana",
-    "min_score": 0.5,
-    "questions": [
-        {
-            "id": 1,
-            "name": "Capitale d'Italia",
-            "text": "Qual'è la capitale d'Italia?",
-            "id_category": 1
-        },
-        {
-            "id": 2,
-            "name": "question2",
-            "text": "<p>domanda 2?<br />\r\n<br />\r\n&nbsp;</p>\r\n\r\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:100%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td>dio</td>\r\n\t\t\t<td>cane</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>dio</td>\r\n\t\t\t<td>porco</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>dio</td>\r\n\t\t\t<td>merda</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>",
-            "id_category": 1
-        }
-    ]
-}*/
 function QuizPage() {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         const testId = window.location.pathname.split("/").pop();
@@ -41,10 +21,12 @@ function QuizPage() {
             });
     }, []);
 
+    const prevQuestion = () => setCurrentIndex((i) => Math.max(i - 1, 0));
+    const nextQuestion = () =>
+        setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
+
     return (
         <main className="quiz-container" aria-busy={loading} aria-live="polite">
-            <h1 className="quiz-title">Quiz</h1>
-
             {loading ? (
                 <div role="status">
                     <div className="loading" aria-hidden="true"></div>
@@ -53,23 +35,72 @@ function QuizPage() {
                     </span>
                 </div>
             ) : (
-                <ul className="quiz-list">
-                    {questions.map((question) => (
-                        <li className="quiz-card" key={question.id}>
-                            <h2 className="quiz-name">{question.name}</h2>
-                            <p className="quiz-description">
-                                <span
-                                    /* TODO: prevent XSS */
-                                    dangerouslySetInnerHTML={{
-                                        __html: DomPurify.sanitize(
-                                            question.text
-                                        ),
-                                    }}
-                                />
-                            </p>
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    <div className="quiz-grid">
+                        {/* Prev (desktop/tablet) */}
+                        <div className="nav-column nav-prev">
+                            <button
+                                className="nav-button"
+                                onClick={prevQuestion}
+                                disabled={currentIndex === 0}
+                                aria-label="Domanda precedente"
+                            >
+                                ←
+                            </button>
+                        </div>
+
+                        {/* Question Tile */}
+                        <div
+                            className="question-card"
+                            role="group"
+                            aria-labelledby="question-title"
+                        >
+                            <h2 id="question-title" className="question-title">
+                                {questions[currentIndex].name}
+                            </h2>
+                            <div
+                                className="question-text"
+                                dangerouslySetInnerHTML={{
+                                    __html: DomPurify.sanitize(
+                                        questions[currentIndex].text
+                                    ),
+                                }}
+                            />
+                        </div>
+
+                        {/* Next (desktop/tablet) */}
+                        <div className="nav-column nav-next">
+                            <button
+                                className="nav-button"
+                                onClick={nextQuestion}
+                                disabled={currentIndex === questions.length - 1}
+                                aria-label="Prossima domanda"
+                            >
+                                →
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Sticky mobile nav */}
+                    <div className="mobile-nav" aria-hidden="false">
+                        <button
+                            className="nav-button"
+                            onClick={prevQuestion}
+                            disabled={currentIndex === 0}
+                            aria-label="Domanda precedente"
+                        >
+                            ← Precedente
+                        </button>
+                        <button
+                            className="nav-button"
+                            onClick={nextQuestion}
+                            disabled={currentIndex === questions.length - 1}
+                            aria-label="Prossima domanda"
+                        >
+                            Successiva →
+                        </button>
+                    </div>
+                </>
             )}
         </main>
     );
