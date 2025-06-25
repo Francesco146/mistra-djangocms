@@ -56,7 +56,14 @@ function QuizPage() {
                     {questions.map((question) => (
                         <li className="quiz-card" key={question.id}>
                             <h2 className="quiz-name">{question.name}</h2>
-                            <p className="quiz-description">{question.text}</p>
+                            <p className="quiz-description">
+                                <span
+                                    /* TODO: prevent XSS */
+                                    dangerouslySetInnerHTML={{
+                                        __html: question.text,
+                                    }}
+                                />
+                            </p>
                         </li>
                     ))}
                 </ul>
