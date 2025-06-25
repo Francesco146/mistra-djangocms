@@ -1,19 +1,16 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Home from './pages/Home';
-import Home from './pages/home'
-import QuizPage from './features/quiz/QuizPage';
-import ResultPage from './features/quiz/ResultPage';
-import NotFound from './pages/NotFound';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import QuizList from "./features/quiz/QuizList";
+import QuizPage from "./features/quiz/QuizPage";
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/quiz/:id" element={<QuizPage />} />
-        <Route path="/quiz/:id/result" element={<ResultPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<QuizList />} />
+                <Route path="/quiz/:id" element={<QuizPage />} />
+                {/* <Route path="/quiz/:id/result" element={<ResultPage />} /> */}
+                {/* TODO: add not found route */}
+            </Routes>
+        </BrowserRouter>
+    );
 }

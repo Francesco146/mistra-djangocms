@@ -20,13 +20,16 @@ function QuizList() {
 
     const handleStartQuiz = async (testId) => {
         console.log(
-            await fetch(`http://localhost:8000/api/tests/${testId}/`).then((res) => {
-                if (!res.ok) {
-                    throw new Error("Network response was not ok");
+            await fetch(`http://localhost:8000/api/tests/${testId}/`).then(
+                (res) => {
+                    if (!res.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return res.json();
                 }
-                return res.json();
-            })
+            )
         );
+        location.href = "http://localhost:5173/quiz/" + testId;
     };
 
     return (
