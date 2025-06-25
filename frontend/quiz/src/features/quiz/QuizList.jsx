@@ -29,7 +29,7 @@ function QuizList() {
                 }
             )
         );
-        location.href = "http://localhost:5173/quiz/" + testId;
+        location.href = "http://localhost:5173/static/quiz/" + testId;
     };
 
     return (

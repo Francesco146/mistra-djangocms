@@ -6,9 +6,9 @@ export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<QuizList />} />
-                <Route path="/quiz/:id" element={<QuizPage />} />
-                {/* <Route path="/quiz/:id/result" element={<ResultPage />} /> */}
+                <Route path="/static/" element={<QuizList />} />
+                <Route path="/static/quiz/:id" element={<QuizPage />} />
+                {/* <Route path="/static/quiz/:id/result" element={<ResultPage />} /> */}
                 {/* TODO: add not found route */}
             </Routes>
         </BrowserRouter>
