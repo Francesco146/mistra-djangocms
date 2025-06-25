@@ -1,18 +1,27 @@
 from rest_framework import viewsets
-from .models import *
-from .serializers import *
+from .models import Question, Test, TestExecution, Sex
+from .serializers import (
+    QuestionSerializer,
+    TestExecutionSerializer,
+    TestSerializer,
+    SexSerializer,
+)
+
 
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
+
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
 
+
 class TestExecutionViewSet(viewsets.ModelViewSet):
     queryset = TestExecution.objects.all()
     serializer_class = TestExecutionSerializer
+
 
 class SexViewSet(viewsets.ReadOnlyModelViewSet):  # solo GET (list, retrieve)
     queryset = Sex.objects.all()
