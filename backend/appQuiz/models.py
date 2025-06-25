@@ -1,5 +1,5 @@
-from django.db import models
 from ckeditor.fields import RichTextField
+from django.db import models
 
 
 # Category (*id,nome)
@@ -19,7 +19,10 @@ class Answer(models.Model):
     name = models.CharField(max_length=255)
     text = models.TextField()
     score = models.DecimalField(max_digits=3, decimal_places=2)  # da -1 a 1
-    id_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    correction = models.TextField(blank=True)
+    id_question = models.ForeignKey(
+        Question, related_name="answers", on_delete=models.CASCADE
+    )
 
 
 # Test(*id,name,description,min_score)
