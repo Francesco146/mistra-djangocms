@@ -1,3 +1,4 @@
+import DomPurify from "dompurify";
 import { useEffect, useState } from "react";
 import "../../styles/QuizList.css";
 
@@ -60,7 +61,9 @@ function QuizPage() {
                                 <span
                                     /* TODO: prevent XSS */
                                     dangerouslySetInnerHTML={{
-                                        __html: question.text,
+                                        __html: DomPurify.sanitize(
+                                            question.text
+                                        ),
                                     }}
                                 />
                             </p>
