@@ -18,12 +18,19 @@ function QuizList() {
             });
     }, []);
 
+    const handleStartQuiz = async (testId) => {
+        console.log(
+            await fetch(`http://localhost:8000/api/tests/${testId}/`).then((res) => {
+                if (!res.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return res.json();
+            })
+        );
+    };
+
     return (
-        <main
-            className="quiz-container"
-            aria-busy={loading}
-            aria-live="polite"
-        >
+        <main className="quiz-container" aria-busy={loading} aria-live="polite">
             <h1 className="quiz-title">Quiz Disponibili</h1>
 
             {loading ? (
@@ -44,6 +51,7 @@ function QuizList() {
                             <button
                                 className="quiz-button"
                                 aria-label={`Inizia il quiz ${test.name}`}
+                                onClick={() => handleStartQuiz(test.id)}
                             >
                                 Inizia
                             </button>
