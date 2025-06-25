@@ -1,15 +1,16 @@
 import DomPurify from "dompurify";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../styles/QuizPage.css";
 
 function QuizPage() {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { id } = useParams();
 
     useEffect(() => {
-        const testId = window.location.pathname.split("/").pop();
-        fetch(`http://localhost:8000/api/tests/${testId}/`)
+        fetch(`http://localhost:8000/api/tests/${id}/`)
             .then((res) => res.json())
             .then((data) => {
                 setQuestions(data.questions);
@@ -19,7 +20,7 @@ function QuizPage() {
                 console.error("Fetch questions error:", err);
                 setLoading(false);
             });
-    }, []);
+    }, [id]);
 
     const prevQuestion = () => setCurrentIndex((i) => Math.max(i - 1, 0));
     const nextQuestion = () =>

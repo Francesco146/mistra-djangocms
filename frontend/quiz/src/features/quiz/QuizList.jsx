@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/QuizList.css";
 
 function QuizList() {
     const [tests, setTests] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8000/api/tests/")
@@ -29,7 +31,7 @@ function QuizList() {
                 }
             )
         );
-        location.href = "http://localhost:5173/static/quiz/" + testId;
+        navigate(`/quiz/${testId}`);
     };
 
     return (
