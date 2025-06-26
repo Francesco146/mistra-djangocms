@@ -176,6 +176,17 @@ function QuizPage() {
                             <div>{currentAnswerObj.correction}</div>
                         </div>
                     )}
+                    <div className="progress-container" aria-hidden="true">
+                        <div
+                            className="progress-bar"
+                            style={{
+                                width: `${
+                                    ((currentIndex + 1) / questions.length) *
+                                    100
+                                }%`,
+                            }}
+                        />
+                    </div>
                 </div>
 
                 {/* Next (desktop/tablet) */}
