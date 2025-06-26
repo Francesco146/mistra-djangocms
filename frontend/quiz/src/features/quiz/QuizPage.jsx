@@ -8,6 +8,7 @@ function QuizPage() {
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
     const { id } = useParams();
 
     useEffect(() => {
@@ -29,11 +30,26 @@ function QuizPage() {
         setCurrentIndex((i) => Math.min(i + 1, questions.length - 1));
 
     const handleAnswerSelect = (answerId) => {
+        if (submitted) return;
         setSelectedAnswers((prev) => {
             const copy = [...prev];
             copy[currentIndex] = answerId;
             return copy;
         });
+    };
+
+    const handleSubmit = () => {
+        if (selectedAnswers.some((ans) => ans === null)) {
+            alert("Per favore, rispondi a tutte le domande prima di inviare.");
+            return;
+        }
+        setSubmitted(true);
+    };
+
+    const handleRetry = () => {
+        setSelectedAnswers(Array(questions.length).fill(null));
+        setCurrentIndex(0);
+        setSubmitted(false);
     };
 
     if (loading) {
@@ -55,13 +71,18 @@ function QuizPage() {
 
     const question = questions[currentIndex];
 
+    const currentSelectionId = selectedAnswers[currentIndex];
+    const currentAnswerObj =
+        question.answers.find((a) => a.id === currentSelectionId) || {};
+    const isCorrect = currentAnswerObj.score === "1.00";
+
+    const correctCount = selectedAnswers.reduce((acc, ansId, idx) => {
+        const ans = questions[idx].answers.find((a) => a.id === ansId);
+        return acc + (ans && ans.score === "1.00" ? 1 : 0);
+    }, 0);
+
     return (
-        <main
-            className="quiz-container"
-            style={{ display: "flex" }}
-            aria-busy="false"
-            aria-live="polite"
-        >
+        <main className="quiz-container" aria-busy="false" aria-live="polite">
             <div className="quiz-grid">
                 {/* Prev (desktop/tablet) */}
                 <div className="nav-column nav-prev">
@@ -94,35 +115,67 @@ function QuizPage() {
                         }}
                     />
 
-                    {/* Answer tile group */}
                     <fieldset className="answer-section">
                         <legend className="sr-only">
                             Opzioni per “{question.name}”
                         </legend>
-                        {question.answers.map((ans) => (
-                            <label
-                                key={ans.id}
-                                htmlFor={`q${question.id}-a${ans.id}`}
-                                className={`answer-option ${
-                                    selectedAnswers[currentIndex] === ans.id
-                                        ? "selected"
-                                        : ""
-                                }`}
-                            >
-                                <input
-                                    type="radio"
-                                    id={`q${question.id}-a${ans.id}`}
-                                    name={`question-${question.id}`}
-                                    value={ans.id}
-                                    checked={
-                                        selectedAnswers[currentIndex] === ans.id
-                                    }
-                                    onChange={() => handleAnswerSelect(ans.id)}
-                                />
-                                <span className="answer-text">{ans.text}</span>
-                            </label>
-                        ))}
+                        {question.answers.map((ans) => {
+                            // determine styling after submit
+                            let extraClass = "";
+                            if (submitted) {
+                                if (ans.score === "1.00")
+                                    extraClass = "correct";
+                                else if (ans.id === currentSelectionId)
+                                    extraClass = "incorrect";
+                            } else if (
+                                selectedAnswers[currentIndex] === ans.id
+                            ) {
+                                extraClass = "selected";
+                            }
+
+                            return (
+                                <label
+                                    key={ans.id}
+                                    htmlFor={`q${question.id}-a${ans.id}`}
+                                    className={`answer-option ${extraClass}`}
+                                >
+                                    <input
+                                        type="radio"
+                                        id={`q${question.id}-a${ans.id}`}
+                                        name={`question-${question.id}`}
+                                        value={ans.id}
+                                        checked={
+                                            selectedAnswers[currentIndex] ===
+                                            ans.id
+                                        }
+                                        onChange={() =>
+                                            handleAnswerSelect(ans.id)
+                                        }
+                                        disabled={submitted}
+                                    />
+                                    <span className="answer-text">
+                                        {ans.text}
+                                    </span>
+                                </label>
+                            );
+                        })}
                     </fieldset>
+
+                    {/* after submit, show feedback */}
+                    {submitted && (
+                        <div
+                            className={`correction-text ${
+                                isCorrect
+                                    ? "feedback-correct"
+                                    : "feedback-incorrect"
+                            }`}
+                        >
+                            <strong>
+                                {isCorrect ? "Corretto!" : "Sbagliato!"}
+                            </strong>
+                            <div>{currentAnswerObj.correction}</div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Next (desktop/tablet) */}
@@ -156,6 +209,30 @@ function QuizPage() {
                 >
                     Successiva →
                 </button>
+            </div>
+
+            {/* Submit / Retry controls */}
+            <div className="quiz-footer">
+                {!submitted && currentIndex === questions.length - 1 && (
+                    <button className="submit-button" onClick={handleSubmit}>
+                        Invia risposte
+                    </button>
+                )}
+                {submitted && (
+                    <div className="summary">
+                        <p>
+                            Hai risposto correttamente a{" "}
+                            <strong>{correctCount}</strong> domande su{" "}
+                            <strong>{questions.length}</strong>. Score:{" "}
+                            <strong>
+                                {(correctCount / questions.length) * 100}%
+                            </strong>
+                        </p>
+                        <button className="retry-button" onClick={handleRetry}>
+                            Riprova quiz
+                        </button>
+                    </div>
+                )}
             </div>
         </main>
     );
