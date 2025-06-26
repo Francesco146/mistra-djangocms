@@ -52,6 +52,35 @@ function QuizPage() {
         setSubmitted(false);
     };
 
+    const getNavButtonClass = (idx) => {
+        let classes = "nav-dot";
+
+        if (currentIndex === idx) {
+            classes += " active";
+        }
+
+        if (submitted) {
+            // Check if the answer is correct
+            const ansId = selectedAnswers[idx];
+            const question = questions[idx];
+            const answer = question.answers.find((a) => a.id === ansId);
+            if (answer && answer.score === "1.00") {
+                classes += " correct";
+            } else {
+                classes += " incorrect";
+            }
+        } else {
+            // Check if question is answered (not submitted yet)
+            if (selectedAnswers[idx] === null) {
+                classes += " unanswered";
+            } else {
+                classes += " answered";
+            }
+        }
+
+        return classes;
+    };
+
     if (loading) {
         return (
             <main
@@ -117,7 +146,7 @@ function QuizPage() {
 
                     <fieldset className="answer-section">
                         <legend className="sr-only">
-                            Opzioni per “{question.name}”
+                            Opzioni per "{question.name}"
                         </legend>
                         {(submitted
                             ? question.answers.filter(
@@ -170,11 +199,14 @@ function QuizPage() {
                                 <button
                                     key={q.id}
                                     type="button"
-                                    className={`nav-dot ${
-                                        currentIndex === idx ? "active" : ""
-                                    }`}
+                                    className={getNavButtonClass(idx)}
                                     onClick={() => setCurrentIndex(idx)}
-                                    aria-label={`Vai alla domanda ${idx + 1}`}
+                                    aria-label={`Vai alla domanda ${idx + 1}${
+                                        selectedAnswers[idx] === null &&
+                                        !submitted
+                                            ? " (non risposta)"
+                                            : ""
+                                    }`}
                                     aria-current={
                                         currentIndex === idx
                                             ? "step"
