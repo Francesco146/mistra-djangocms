@@ -161,6 +161,33 @@ function QuizPage() {
                         })}
                     </fieldset>
 
+                    {/* ── Navigation Grid ───────────────────────────────────────────────────────── */}
+                    {questions.length > 0 && (
+                        <nav
+                            className="question-nav"
+                            aria-label="Navigazione tra le domande"
+                        >
+                            {questions.map((q, idx) => (
+                                <button
+                                    key={q.id}
+                                    type="button"
+                                    className={`nav-dot ${
+                                        currentIndex === idx ? "active" : ""
+                                    }`}
+                                    onClick={() => setCurrentIndex(idx)}
+                                    aria-label={`Vai alla domanda ${idx + 1}`}
+                                    aria-current={
+                                        currentIndex === idx
+                                            ? "step"
+                                            : undefined
+                                    }
+                                >
+                                    {idx + 1}
+                                </button>
+                            ))}
+                        </nav>
+                    )}
+
                     {/* after submit, show feedback */}
                     {submitted && (
                         <div
