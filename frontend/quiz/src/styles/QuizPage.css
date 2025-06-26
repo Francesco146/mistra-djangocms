@@ -5,6 +5,9 @@
     --color-text-secondary: #6b7280;
     --color-primary: #494ce9;
     --color-primary-hover: #332bc5;
+    --color-selected-bg: #e4e6ff;
+    --color-answer-correct: #22c55e;
+    --color-answer-incorrect: #ef4444;
 
     --spacing-sm: 0.75rem;
     --spacing-md: 1.5rem;
@@ -167,5 +170,65 @@
         flex: 1;
         max-width: calc((100% - var(--spacing-md) * 2 - var(--spacing-sm)) / 2);
         height: 3.5rem;
+    }
+}
+
+/* ── Answer Tiles ─────────────────────────────────────────────────────────── */
+
+.answer-section {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.answer-option {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    background: var(--color-card);
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.answer-text {
+    margin-left: var(--spacing-sm);
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.answer-option.selected {
+  background: var(--color-selected-bg);
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+.answer-option.selected:hover,
+.answer-option.selected:focus-within {
+box-shadow: var(--shadow-hover);
+}
+
+.answer-option input[type="radio"] {
+    accent-color: var(--color-primary);
+    margin: 0;
+}
+
+.answer-option input[type="radio"]:focus-visible + .answer-text,
+.answer-option:focus-within {
+    outline: 3px solid var(--color-primary-hover);
+    outline-offset: 2px;
+}
+
+/* ensure scrollable if too many answers */
+.question-card {
+    overflow-y: auto;
+}
+
+/* MOBILE: answer tiles adapt */
+@media (max-width: 600px) {
+    .answer-option {
+        font-size: 0.9rem;
+        padding: var(--spacing-sm);
     }
 }
