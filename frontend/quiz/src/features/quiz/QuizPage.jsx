@@ -1,6 +1,8 @@
 import DomPurify from "dompurify";
+import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import favicon from "../../assets/image.png";
 import "../../styles/QuizPage.css";
 
 function QuizPage() {
@@ -50,6 +52,75 @@ function QuizPage() {
         setSelectedAnswers(Array(questions.length).fill(null));
         setCurrentIndex(0);
         setSubmitted(false);
+    };
+
+    const handleSavePDF = () => {
+        const pdf = new jsPDF({
+            unit: "pt",
+            format: "a4",
+        });
+
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const margin = 40;
+        const lineHeight = 16;
+        let cursorY = margin;
+
+        // 1) Aggiungi il logo in alto a sinistra
+        const img = new Image();
+        img.src = favicon;
+        img.onload = () => {
+            const logoWidth = 50;
+            const logoHeight = (img.height * logoWidth) / img.width;
+            pdf.addImage(img, "PNG", margin, cursorY, logoWidth, logoHeight);
+
+            // space after the logo
+            cursorY += logoHeight + 20;
+
+            // title
+            pdf.setFontSize(18);
+            pdf.text("Risultati del Quiz", pageWidth / 2, cursorY, {
+                align: "center",
+            });
+            cursorY += 30;
+
+            // for each question, save the question, answer, and result
+            pdf.setFontSize(12);
+            questions.forEach((q, idx) => {
+                // add new page if needed
+                if (cursorY + 3 * lineHeight > pageHeight - margin) {
+                    pdf.addPage();
+                    cursorY = margin;
+                }
+
+                pdf.setFont(undefined, "bold");
+                pdf.text(`Domanda ${idx + 1}: ${q.name}`, margin, cursorY);
+                cursorY += lineHeight;
+
+                const ans = q.answers.find(
+                    (a) => a.id === selectedAnswers[idx]
+                );
+                const givenText = ans ? ans.text : "—";
+                pdf.setFont(undefined, "normal");
+                pdf.text(
+                    `Risposta fornita: ${givenText}`,
+                    margin + 10,
+                    cursorY
+                );
+                cursorY += lineHeight;
+
+                const isCorrect = ans && ans.score === "1.00";
+                pdf.text(
+                    `Risultato: ${isCorrect ? "Corretto" : "Sbagliato"}`,
+                    margin + 10,
+                    cursorY
+                );
+                // extra padding
+                cursorY += lineHeight + 10;
+            });
+
+            pdf.save(`risultati_quiz_${id}.pdf`);
+        };
     };
 
     const getNavButtonClass = (idx) => {
@@ -297,9 +368,20 @@ function QuizPage() {
                                 {(correctCount / questions.length) * 100}%
                             </strong>
                         </p>
-                        <button className="retry-button" onClick={handleRetry}>
-                            Riprova quiz
-                        </button>
+                        <div className="summary-buttons">
+                            <button
+                                className="retry-button"
+                                onClick={handleRetry}
+                            >
+                                Riprova quiz
+                            </button>
+                            <button
+                                className="save-button"
+                                onClick={handleSavePDF}
+                            >
+                                Salva risultati PDF
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
