@@ -119,17 +119,19 @@ function QuizPage() {
                         <legend className="sr-only">
                             Opzioni per “{question.name}”
                         </legend>
-                        {question.answers.map((ans) => {
-                            // determine styling after submit
+                        {(submitted
+                            ? question.answers.filter(
+                                  (a) => a.id === currentSelectionId
+                              )
+                            : question.answers
+                        ).map((ans) => {
                             let extraClass = "";
                             if (submitted) {
-                                if (ans.score === "1.00")
-                                    extraClass = "correct";
-                                else if (ans.id === currentSelectionId)
-                                    extraClass = "incorrect";
-                            } else if (
-                                selectedAnswers[currentIndex] === ans.id
-                            ) {
+                                extraClass =
+                                    ans.score === "1.00"
+                                        ? "correct"
+                                        : "incorrect";
+                            } else if (currentSelectionId === ans.id) {
                                 extraClass = "selected";
                             }
 
@@ -144,10 +146,7 @@ function QuizPage() {
                                         id={`q${question.id}-a${ans.id}`}
                                         name={`question-${question.id}`}
                                         value={ans.id}
-                                        checked={
-                                            selectedAnswers[currentIndex] ===
-                                            ans.id
-                                        }
+                                        checked={currentSelectionId === ans.id}
                                         onChange={() =>
                                             handleAnswerSelect(ans.id)
                                         }
