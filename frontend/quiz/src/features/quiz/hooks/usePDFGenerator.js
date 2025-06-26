@@ -1,6 +1,6 @@
+import favicon from "@assets/images/favicon.png";
 import jsPDF from "jspdf";
 import { useCallback } from "react";
-import favicon from "../../assets/favicon.png";
 
 export const usePDFGenerator = () => {
     const generatePDF = useCallback((questions, selectedAnswers, quizId) => {

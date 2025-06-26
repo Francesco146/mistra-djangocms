@@ -1,4 +1,4 @@
-import NavigationButton from "./NavigationButton";
+import { MobileNavigationButton } from "@components/ui";
 
 const MobileNavigation = ({
     currentIndex,
@@ -8,20 +8,20 @@ const MobileNavigation = ({
 }) => {
     return (
         <div className="mobile-nav" aria-hidden="false">
-            <NavigationButton
+            <MobileNavigationButton
                 direction="prev"
                 onClick={onPrevious}
                 disabled={currentIndex === 0}
             >
                 ← Precedente
-            </NavigationButton>
-            <NavigationButton
+            </MobileNavigationButton>
+            <MobileNavigationButton
                 direction="next"
                 onClick={onNext}
                 disabled={currentIndex === questionsLength - 1}
             >
                 Successiva →
-            </NavigationButton>
+            </MobileNavigationButton>
         </div>
     );
 };

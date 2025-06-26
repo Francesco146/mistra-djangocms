@@ -1,4 +1,4 @@
-const NavigationButton = ({
+const MobileNavigationButton = ({
     direction,
     onClick,
     disabled,
@@ -20,4 +20,4 @@ const NavigationButton = ({
     );
 };
 
-export default NavigationButton;
+export default MobileNavigationButton;

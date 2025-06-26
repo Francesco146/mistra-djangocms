@@ -1,6 +1,5 @@
+import { AnswerOption, QuestionNavigation } from "@features/components";
 import DomPurify from "dompurify";
-import AnswerOption from "./AnswerOption";
-import QuestionNavigation from "./QuestionNavigation";
 
 const QuestionCard = ({
     question,
