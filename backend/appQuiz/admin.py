@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Test, Question, Answer, Category
+from .models import (
+    Test,
+    Question,
+    Answer,
+    Category,
+    TestExecution,
+    GivenAnswer,
+    Sex,
+)
 
 
 class AnswerInline(admin.TabularInline):
@@ -8,11 +16,13 @@ class AnswerInline(admin.TabularInline):
 
 
 class QuestionInline(admin.TabularInline):
-    model = Test.questions.through  # la relazione ManyToMany di Test->Question
+    model = Test.questions.through  
+    extra = 1
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin): ...
+class CategoryAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Question)
@@ -23,10 +33,21 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
-    exclude = ("questions",)  # evitiamo il doppio campo; gestito da inline
+    exclude = ("questions",)  
+
+class GivenAnswerInline(admin.TabularInline):
+    model = GivenAnswer
+    extra = 0
+    fields = ("question", "answer")
+    readonly_fields = ("question", "answer")
+
+@admin.register(TestExecution)
+class TestExecutionAdmin(admin.ModelAdmin):
+    list_display = ("id", "test", "age", "score", "IP", "duration", "execution_time")
+    readonly_fields = ("execution_time",)
+    inlines = [GivenAnswerInline]
 
 
-# registra Answer se vuoi gestirlo separatamente
-# @admin.register(Answer)
-# class AnswerAdmin(admin.ModelAdmin):
-#     pass
+@admin.register(Sex)
+class SexAdmin(admin.ModelAdmin):
+    pass
