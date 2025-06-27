@@ -71,7 +71,12 @@ export const useQuizLogic = (id) => {
             alert("Per favore, rispondi a tutte le domande prima di inviare.");
             return;
         }
-        // Log or submit userAge and userSex as well
+        if (!userAge || !userSex) {
+            alert(
+                "Per favore, fornisci la tua età e sesso riavviando il quiz."
+            );
+            return;
+        }
         console.log("All questions answered:", selectedAnswers);
         console.log("User age:", userAge, "User sex:", userSex);
         let endTimestamp = Date.now();
