@@ -24,7 +24,19 @@ export const useQuizLogic = (id) => {
         fetch(`http://localhost:8000/api/tests/${id}/`)
             .then((res) => res.json())
             .then((data) => {
-                setQuestions(data.questions);
+                const questionsWithNoAnswer = data.questions.map((q) => ({
+                    ...q,
+                    answers: [
+                        ...q.answers,
+                        {
+                            id: -1,
+                            text: "Non rispondo",
+                            score: "0.00",
+                            correction: "",
+                        },
+                    ],
+                }));
+                setQuestions(questionsWithNoAnswer);
                 setSelectedAnswers({});
                 setLoading(false);
                 setStartTimestamp(Date.now());
