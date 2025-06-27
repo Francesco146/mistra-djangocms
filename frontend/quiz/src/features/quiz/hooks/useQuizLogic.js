@@ -6,6 +6,8 @@ export const useQuizLogic = (id) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
+    const [startTimestamp, setStartTimestamp] = useState(null);
+    const [submitTimestamp, setSubmitTimestamp] = useState(null);
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/tests/${id}/`)
@@ -14,6 +16,8 @@ export const useQuizLogic = (id) => {
                 setQuestions(data.questions);
                 setSelectedAnswers({});
                 setLoading(false);
+                setStartTimestamp(Date.now());
+                setSubmitTimestamp(null);
             })
             .catch((err) => {
                 console.error("Fetch questions error:", err);
@@ -57,13 +61,21 @@ export const useQuizLogic = (id) => {
             return;
         }
         console.log("All questions answered:", selectedAnswers);
+        let endTimestamp = Date.now();
+        console.log(
+            "Duration (minutes):",
+            (endTimestamp - startTimestamp) / 60000
+        );
         setSubmitted(true);
-    }, [selectedAnswers, questions]);
+        setSubmitTimestamp(endTimestamp);
+    }, [selectedAnswers, questions, startTimestamp]);
 
     const handleRetry = useCallback(() => {
         setSelectedAnswers({});
         setCurrentIndex(0);
         setSubmitted(false);
+        setStartTimestamp(Date.now());
+        setSubmitTimestamp(null);
     }, []);
 
     const correctCount = questions.reduce((acc, q) => {
@@ -86,5 +98,7 @@ export const useQuizLogic = (id) => {
         handleAnswerSelect,
         handleSubmit,
         handleRetry,
+        startTimestamp,
+        submitTimestamp,
     };
 };
