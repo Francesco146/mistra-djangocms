@@ -38,7 +38,6 @@ export const usePDFGenerator = () => {
                 });
                 cursorY += 30;
 
-                // Add test id, age, and sex in a nice layout
                 pdf.setFontSize(12);
                 pdf.setFont(undefined, "bold");
                 pdf.text(`ID Test:`, margin, cursorY);
@@ -68,7 +67,6 @@ export const usePDFGenerator = () => {
                     pdf.text(`Domanda ${idx + 1}: ${q.name}`, margin, cursorY);
                     cursorY += lineHeight;
 
-                    // Use selectedAnswers as a map: selectedAnswers[q.id]
                     const ans = q.answers.find(
                         (a) => a.id === selectedAnswers[q.id]
                     );
