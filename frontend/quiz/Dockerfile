@@ -1,5 +1,5 @@
 # Usa immagine node ufficiale
-FROM node:20
+FROM node:24-alpine
 
 # Cartella lavoro dentro container
 WORKDIR /app
