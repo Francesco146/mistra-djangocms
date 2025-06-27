@@ -1,11 +1,11 @@
-import QuizList from './features/quiz/QuizList';
+import Router from "@routing/Router";
 
 function App() {
-  return (
-    <div className="App">
-      <QuizList />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Router />
+        </div>
+    );
 }
 
 export default App;

@@ -1,0 +1,123 @@
+import { LoadingSpinner, NavigationButton } from "@components/ui";
+import {
+    MobileNavigation,
+    QuestionCard,
+    QuizSummary,
+} from "@features/components";
+import { usePDFGenerator } from "@hooks/usePDFGenerator";
+import { useQuizLogic } from "@hooks/useQuizLogic";
+import { useNavigate, useParams } from "react-router-dom";
+import styles from "./QuizPage.module.css";
+
+function QuizPage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const {
+        questions,
+        loading,
+        currentIndex,
+        selectedAnswers,
+        submitted,
+        correctCount,
+        setCurrentIndex,
+        prevQuestion,
+        nextQuestion,
+        handleAnswerSelect,
+        handleSubmit,
+        handleRetry,
+        userAge,
+        userSex,
+    } = useQuizLogic(id);
+
+    const { generatePDF } = usePDFGenerator();
+
+    const handleSavePDF = () => {
+        generatePDF(questions, selectedAnswers, id, userAge, userSex);
+    };
+
+    const handleRetryAndGoToStart = () => {
+        handleRetry();
+        navigate(`/quiz/${id}/start`);
+    };
+
+    if (loading) {
+        return <LoadingSpinner />;
+    }
+
+    const question = questions[currentIndex];
+
+    return (
+        <main
+            className={styles.quizContainer}
+            aria-busy="false"
+            aria-live="polite"
+        >
+            <div className={styles.quizGrid}>
+                {/* Previous navigation (desktop/tablet) */}
+                <div className={`${styles.navColumn} ${styles.navPrev}`}>
+                    <NavigationButton
+                        direction="prev"
+                        onClick={prevQuestion}
+                        disabled={currentIndex === 0}
+                    >
+                        ←
+                    </NavigationButton>
+                </div>
+
+                {/* Question + Answers */}
+                <div className={styles.questionColumn}>
+                    <QuestionCard
+                        question={question}
+                        questions={questions}
+                        currentIndex={currentIndex}
+                        selectedAnswers={selectedAnswers}
+                        submitted={submitted}
+                        onAnswerSelect={handleAnswerSelect}
+                        onQuestionSelect={setCurrentIndex}
+                    />
+                </div>
+
+                {/* Next navigation (desktop/tablet) */}
+                <div className={`${styles.navColumn} ${styles.navNext}`}>
+                    <NavigationButton
+                        direction="next"
+                        onClick={nextQuestion}
+                        disabled={currentIndex === questions.length - 1}
+                    >
+                        →
+                    </NavigationButton>
+                </div>
+            </div>
+
+            {/* Mobile navigation */}
+            <MobileNavigation
+                currentIndex={currentIndex}
+                questionsLength={questions.length}
+                onPrevious={prevQuestion}
+                onNext={nextQuestion}
+            />
+
+            {/* Submit / Retry controls */}
+            <div className={styles.quizFooter}>
+                {!submitted && currentIndex === questions.length - 1 && (
+                    <button
+                        className={styles.submitButton}
+                        onClick={handleSubmit}
+                    >
+                        Invia risposte
+                    </button>
+                )}
+                {submitted && (
+                    <QuizSummary
+                        correctCount={correctCount}
+                        totalQuestions={questions.length}
+                        onRetry={handleRetryAndGoToStart}
+                        onSavePDF={handleSavePDF}
+                    />
+                )}
+            </div>
+        </main>
+    );
+}
+
+export default QuizPage;

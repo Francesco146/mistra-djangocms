@@ -26,12 +26,17 @@ services:
     volumes:
       - "./frontend/quiz:/app"
       # Evita conflitti con node_modules: non sincronizziamo questa cartella
-      - /app/node_modules
-    # Comando per avviare il dev server di Vite
-    command: npm run dev
+      - quiz_app_node_modules:/app/node_modules
+    command: >
+      sh -c "npm install --no-audit --no-fund &&
+             npm run dev"
+
     networks:
       - djangocmsnet
 
 networks:
   # Network condivisa tra i container
   djangocmsnet:
+
+volumes:
+  quiz_app_node_modules:

@@ -1,0 +1,99 @@
+/* QuizListPage.module.css */
+
+.quizContainer {
+    max-width: 960px;
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-md);
+}
+
+.quizTitle {
+    font-size: 2.75rem;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.loading {
+    width: 6rem;
+    height: 1.25rem;
+    margin: var(--spacing-md) auto;
+    background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+    background-size: 200% 100%;
+    border-radius: var(--radius);
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.quizList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    padding: 0;
+    list-style: none;
+}
+
+.quizCard {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.quizCard:hover,
+.quizCard:focus-within {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.quizName {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.quizDescription {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.quizButton {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.quizButton:hover,
+.quizButton:focus {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    outline: none;
+}

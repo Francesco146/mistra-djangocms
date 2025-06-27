@@ -1,0 +1,58 @@
+/* AnswerOption.module.css */
+
+.answerOption {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    background: var(--color-card);
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.answerText {
+    margin-left: var(--spacing-sm);
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.answerOption--selected {
+    background: var(--color-selected-bg);
+    color: var(--color-text);
+    border-color: var(--color-primary);
+}
+.answerOption--selected:hover,
+.answerOption--selected:focus-within {
+    box-shadow: var(--shadow-hover);
+}
+
+.answerOption input[type="radio"] {
+    accent-color: var(--color-primary);
+    margin: 0;
+}
+
+.answerOption input[type="radio"]:focus-visible + .answerText,
+.answerOption:focus-within {
+    outline: 3px solid var(--color-primary-hover);
+    outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+    .answerOption {
+        font-size: 0.9rem;
+        padding: var(--spacing-sm);
+    }
+}
+
+.answerOption--correct {
+    background: var(--color-answer-correct);
+    border-color: var(--color-answer-correct);
+    color: #fff;
+}
+
+.answerOption--incorrect {
+    background: var(--color-answer-incorrect);
+    border-color: var(--color-answer-incorrect);
+    color: #fff;
+}

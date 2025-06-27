@@ -1,0 +1,1 @@
+export { default as QuizStartPage } from "./QuizStartPage";
