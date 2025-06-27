@@ -1,0 +1,33 @@
+.notFoundContainer {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.notFoundTitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text, #111827);
+}
+
+.notFoundText {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary, #6b7280);
+}
+
+.homeButton {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--color-primary, #494ce9);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s;
+}
+.homeButton:hover,
+.homeButton:focus {
+    background: var(--color-primary-hover, #332bc5);
+    transform: translateY(-2px);
+    outline: none;
+}

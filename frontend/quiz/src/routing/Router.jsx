@@ -1,4 +1,9 @@
-import { QuizListPage, QuizPage, QuizStartPage } from "@features/pages";
+import {
+    NotFoundPage,
+    QuizListPage,
+    QuizPage,
+    QuizStartPage,
+} from "@features/pages";
 import {
     HashRouter,
     Navigate,
@@ -32,8 +37,7 @@ export default function Router() {
                         </RequireQuizUserInfo>
                     }
                 />
-                {/* <Route path="/quiz/:id/result" element={<ResultPage />} /> */}
-                {/* TODO: add not found route */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </HashRouter>
     );
