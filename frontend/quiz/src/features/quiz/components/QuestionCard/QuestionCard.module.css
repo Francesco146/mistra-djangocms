@@ -23,7 +23,6 @@
     color: var(--color-text-secondary);
     line-height: 1.6;
     flex: 1;
-    overflow-y: auto;
 }
 
 .answerSection {
