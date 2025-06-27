@@ -1,5 +1,26 @@
 [
     {
+        "model": "appQuiz.sex",
+        "pk": 1,
+        "fields": {
+            "name": "Maschio"
+        }
+    },
+    {
+        "model": "appQuiz.sex",
+        "pk": 2,
+        "fields": {
+            "name": "Femmina"
+        }
+    },
+    {
+        "model": "appQuiz.sex",
+        "pk": 3,
+        "fields": {
+            "name": "Altro"
+        }
+    },
+    {
         "model": "appQuiz.category",
         "pk": 5,
         "fields": {
