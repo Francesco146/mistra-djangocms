@@ -8,6 +8,17 @@ export const useQuizLogic = (id) => {
     const [submitted, setSubmitted] = useState(false);
     const [startTimestamp, setStartTimestamp] = useState(null);
     const [submitTimestamp, setSubmitTimestamp] = useState(null);
+    const [userAge, setUserAge] = useState(
+        () => localStorage.getItem("quizUserAge") || ""
+    );
+    const [userSex, setUserSex] = useState(
+        () => localStorage.getItem("quizUserSex") || ""
+    );
+
+    useEffect(() => {
+        setUserAge(localStorage.getItem("quizUserAge") || "");
+        setUserSex(localStorage.getItem("quizUserSex") || "");
+    }, [id]);
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/tests/${id}/`)
@@ -60,7 +71,9 @@ export const useQuizLogic = (id) => {
             alert("Per favore, rispondi a tutte le domande prima di inviare.");
             return;
         }
+        // Log or submit userAge and userSex as well
         console.log("All questions answered:", selectedAnswers);
+        console.log("User age:", userAge, "User sex:", userSex);
         let endTimestamp = Date.now();
         console.log(
             "Duration (minutes):",
@@ -68,7 +81,7 @@ export const useQuizLogic = (id) => {
         );
         setSubmitted(true);
         setSubmitTimestamp(endTimestamp);
-    }, [selectedAnswers, questions, startTimestamp]);
+    }, [selectedAnswers, questions, startTimestamp, userAge, userSex]);
 
     const handleRetry = useCallback(() => {
         setSelectedAnswers({});
@@ -76,6 +89,10 @@ export const useQuizLogic = (id) => {
         setSubmitted(false);
         setStartTimestamp(Date.now());
         setSubmitTimestamp(null);
+        localStorage.removeItem("quizUserAge");
+        localStorage.removeItem("quizUserSex");
+        setUserAge("");
+        setUserSex("");
     }, []);
 
     const correctCount = questions.reduce((acc, q) => {
@@ -100,5 +117,7 @@ export const useQuizLogic = (id) => {
         handleRetry,
         startTimestamp,
         submitTimestamp,
+        userAge,
+        userSex,
     };
 };

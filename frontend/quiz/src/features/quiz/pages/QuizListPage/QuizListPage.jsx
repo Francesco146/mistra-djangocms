@@ -21,7 +21,7 @@ function QuizListPage() {
     }, []);
 
     const handleStartQuiz = async (testId) => {
-        navigate(`/quiz/${testId}`);
+        navigate(`/quiz/${testId}/start`);
     };
 
     return (

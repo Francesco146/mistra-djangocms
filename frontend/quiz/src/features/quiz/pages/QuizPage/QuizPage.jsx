@@ -7,10 +7,11 @@ import {
 import { usePDFGenerator } from "@hooks/usePDFGenerator";
 import { useQuizLogic } from "@hooks/useQuizLogic";
 import "@styles/QuizPage.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function QuizPage() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const {
         questions,
         loading,
@@ -30,6 +31,11 @@ function QuizPage() {
 
     const handleSavePDF = () => {
         generatePDF(questions, selectedAnswers, id);
+    };
+
+    const handleRetryAndGoToStart = () => {
+        handleRetry();
+        navigate(`/quiz/${id}/start`);
     };
 
     if (loading) {
@@ -94,7 +100,7 @@ function QuizPage() {
                     <QuizSummary
                         correctCount={correctCount}
                         totalQuestions={questions.length}
-                        onRetry={handleRetry}
+                        onRetry={handleRetryAndGoToStart}
                         onSavePDF={handleSavePDF}
                     />
                 )}
