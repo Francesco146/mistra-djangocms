@@ -10,7 +10,7 @@ const QuestionCard = ({
     onAnswerSelect,
     onQuestionSelect,
 }) => {
-    const currentSelectionId = selectedAnswers[currentIndex];
+    const currentSelectionId = selectedAnswers[question.id];
     const currentAnswerObj =
         question.answers.find((a) => a.id === currentSelectionId) || {};
     const isCorrect = currentAnswerObj.score === "1.00";

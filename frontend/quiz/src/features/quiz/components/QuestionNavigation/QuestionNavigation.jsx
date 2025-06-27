@@ -12,9 +12,10 @@ const QuestionNavigation = ({
             classes += " active";
         }
 
+        const question = questions[idx];
+        const ansId = selectedAnswers[question.id];
+
         if (submitted) {
-            const ansId = selectedAnswers[idx];
-            const question = questions[idx];
             const answer = question.answers.find((a) => a.id === ansId);
             if (answer && answer.score === "1.00") {
                 classes += " correct";
@@ -22,7 +23,7 @@ const QuestionNavigation = ({
                 classes += " incorrect";
             }
         } else {
-            if (selectedAnswers[idx] === null) {
+            if (ansId === undefined || ansId === null) {
                 classes += " unanswered";
             } else {
                 classes += " answered";
@@ -41,7 +42,9 @@ const QuestionNavigation = ({
                     className={getNavButtonClass(idx)}
                     onClick={() => onQuestionSelect(idx)}
                     aria-label={`Vai alla domanda ${idx + 1}${
-                        selectedAnswers[idx] === null && !submitted
+                        (selectedAnswers[q.id] === undefined ||
+                            selectedAnswers[q.id] === null) &&
+                        !submitted
                             ? " (non risposta)"
                             : ""
                     }`}

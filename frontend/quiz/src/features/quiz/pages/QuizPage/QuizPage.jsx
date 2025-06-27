@@ -1,13 +1,13 @@
-import { usePDFGenerator } from "@hooks/usePDFGenerator";
-import { useParams } from "react-router-dom";
-import { NavigationButton, LoadingSpinner } from "@components/ui";
-import "@styles/QuizPage.css";
-import { useQuizLogic } from "@hooks/useQuizLogic";
+import { LoadingSpinner, NavigationButton } from "@components/ui";
 import {
     MobileNavigation,
     QuestionCard,
     QuizSummary,
 } from "@features/components";
+import { usePDFGenerator } from "@hooks/usePDFGenerator";
+import { useQuizLogic } from "@hooks/useQuizLogic";
+import "@styles/QuizPage.css";
+import { useParams } from "react-router-dom";
 
 function QuizPage() {
     const { id } = useParams();

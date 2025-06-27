@@ -4,7 +4,7 @@ export const useQuizLogic = (id) => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [selectedAnswers, setSelectedAnswers] = useState([]);
+    const [selectedAnswers, setSelectedAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
@@ -12,7 +12,7 @@ export const useQuizLogic = (id) => {
             .then((res) => res.json())
             .then((data) => {
                 setQuestions(data.questions);
-                setSelectedAnswers(Array(data.questions.length).fill(null));
+                setSelectedAnswers({});
                 setLoading(false);
             })
             .catch((err) => {
@@ -33,31 +33,43 @@ export const useQuizLogic = (id) => {
         (answerId) => {
             if (submitted) return;
             setSelectedAnswers((prev) => {
-                const copy = [...prev];
-                copy[currentIndex] = answerId;
+                const copy = { ...prev };
+                const qid = questions[currentIndex]?.id;
+                if (qid !== undefined) {
+                    copy[qid] = answerId;
+                }
                 return copy;
             });
         },
-        [currentIndex, submitted]
+        [currentIndex, submitted, questions]
     );
 
     const handleSubmit = useCallback(() => {
-        if (selectedAnswers.some((ans) => ans === null)) {
+        const allAnswered =
+            questions.length > 0 &&
+            questions.every(
+                (q) =>
+                    selectedAnswers[q.id] !== undefined &&
+                    selectedAnswers[q.id] !== null
+            );
+        if (!allAnswered) {
             alert("Per favore, rispondi a tutte le domande prima di inviare.");
             return;
         }
+        console.log("All questions answered:", selectedAnswers);
         setSubmitted(true);
-    }, [selectedAnswers]);
+    }, [selectedAnswers, questions]);
 
     const handleRetry = useCallback(() => {
-        setSelectedAnswers(Array(questions.length).fill(null));
+        setSelectedAnswers({});
         setCurrentIndex(0);
         setSubmitted(false);
-    }, [questions.length]);
+    }, []);
 
-    const correctCount = selectedAnswers.reduce((acc, ansId, idx) => {
-        if (!questions[idx]) return acc;
-        const ans = questions[idx].answers.find((a) => a.id === ansId);
+    const correctCount = questions.reduce((acc, q) => {
+        const ansId = selectedAnswers[q.id];
+        if (!ansId) return acc;
+        const ans = q.answers.find((a) => a.id === ansId);
         return acc + (ans && ans.score === "1.00" ? 1 : 0);
     }, 0);
 
