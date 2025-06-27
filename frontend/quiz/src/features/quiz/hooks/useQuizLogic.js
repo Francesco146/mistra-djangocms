@@ -71,14 +71,15 @@ export const useQuizLogic = (id) => {
             alert("Per favore, rispondi a tutte le domande prima di inviare.");
             return;
         }
-        if (!userAge || !userSex) {
+        let sexID = localStorage.getItem("quizUserSexID");
+        if (!userAge || !userSex || !sexID) {
             alert(
                 "Per favore, fornisci la tua età e sesso riavviando il quiz."
             );
             return;
         }
         console.log("All questions answered:", selectedAnswers);
-        console.log("User age:", userAge, "User sex:", userSex);
+        console.log("User age:", userAge, "User sex:", sexID);
         let endTimestamp = Date.now();
         console.log(
             "Duration (minutes):",
@@ -96,6 +97,7 @@ export const useQuizLogic = (id) => {
         setSubmitTimestamp(null);
         localStorage.removeItem("quizUserAge");
         localStorage.removeItem("quizUserSex");
+        localStorage.removeItem("quizUserSexID");
         setUserAge("");
         setUserSex("");
     }, []);

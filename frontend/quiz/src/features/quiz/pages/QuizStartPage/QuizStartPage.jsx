@@ -26,8 +26,13 @@ function QuizStartPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!age || !sex) return;
+        const selectedSex = sexChoices.find(
+            (choice) => String(choice.id) === sex
+        );
+        const sexLabel = selectedSex ? selectedSex.name : sex;
         localStorage.setItem("quizUserAge", age);
-        localStorage.setItem("quizUserSex", sex);
+        localStorage.setItem("quizUserSex", sexLabel);
+        localStorage.setItem("quizUserSexID", sex);
         navigate(`/quiz/${id}`);
     };
 

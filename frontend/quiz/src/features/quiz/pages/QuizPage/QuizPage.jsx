@@ -25,12 +25,14 @@ function QuizPage() {
         handleAnswerSelect,
         handleSubmit,
         handleRetry,
+        userAge,
+        userSex,
     } = useQuizLogic(id);
 
     const { generatePDF } = usePDFGenerator();
 
     const handleSavePDF = () => {
-        generatePDF(questions, selectedAnswers, id);
+        generatePDF(questions, selectedAnswers, id, userAge, userSex);
     };
 
     const handleRetryAndGoToStart = () => {

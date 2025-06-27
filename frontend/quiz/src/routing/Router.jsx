@@ -11,7 +11,8 @@ function RequireQuizUserInfo({ children }) {
     const { id } = useParams();
     const age = localStorage.getItem("quizUserAge");
     const sex = localStorage.getItem("quizUserSex");
-    if (!age || !sex) {
+    const sexID = localStorage.getItem("quizUserSexID");
+    if (!age || !sex || !sexID) {
         return <Navigate to={`/quiz/${id}/start`} replace />;
     }
     return children;
