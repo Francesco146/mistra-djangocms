@@ -6,8 +6,8 @@ import {
 } from "@features/components";
 import { usePDFGenerator } from "@hooks/usePDFGenerator";
 import { useQuizLogic } from "@hooks/useQuizLogic";
-import "@styles/QuizPage.css";
 import { useNavigate, useParams } from "react-router-dom";
+import styles from "./QuizPage.module.css";
 
 function QuizPage() {
     const { id } = useParams();
@@ -45,10 +45,14 @@ function QuizPage() {
     const question = questions[currentIndex];
 
     return (
-        <main className="quiz-container" aria-busy="false" aria-live="polite">
-            <div className="quiz-grid">
+        <main
+            className={styles.quizContainer}
+            aria-busy="false"
+            aria-live="polite"
+        >
+            <div className={styles.quizGrid}>
                 {/* Previous navigation (desktop/tablet) */}
-                <div className="nav-column nav-prev">
+                <div className={`${styles.navColumn} ${styles.navPrev}`}>
                     <NavigationButton
                         direction="prev"
                         onClick={prevQuestion}
@@ -59,18 +63,20 @@ function QuizPage() {
                 </div>
 
                 {/* Question + Answers */}
-                <QuestionCard
-                    question={question}
-                    questions={questions}
-                    currentIndex={currentIndex}
-                    selectedAnswers={selectedAnswers}
-                    submitted={submitted}
-                    onAnswerSelect={handleAnswerSelect}
-                    onQuestionSelect={setCurrentIndex}
-                />
+                <div className={styles.questionColumn}>
+                    <QuestionCard
+                        question={question}
+                        questions={questions}
+                        currentIndex={currentIndex}
+                        selectedAnswers={selectedAnswers}
+                        submitted={submitted}
+                        onAnswerSelect={handleAnswerSelect}
+                        onQuestionSelect={setCurrentIndex}
+                    />
+                </div>
 
                 {/* Next navigation (desktop/tablet) */}
-                <div className="nav-column nav-next">
+                <div className={`${styles.navColumn} ${styles.navNext}`}>
                     <NavigationButton
                         direction="next"
                         onClick={nextQuestion}
@@ -90,9 +96,12 @@ function QuizPage() {
             />
 
             {/* Submit / Retry controls */}
-            <div className="quiz-footer">
+            <div className={styles.quizFooter}>
                 {!submitted && currentIndex === questions.length - 1 && (
-                    <button className="submit-button" onClick={handleSubmit}>
+                    <button
+                        className={styles.submitButton}
+                        onClick={handleSubmit}
+                    >
                         Invia risposte
                     </button>
                 )}

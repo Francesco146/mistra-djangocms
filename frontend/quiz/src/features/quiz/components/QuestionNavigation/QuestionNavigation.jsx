@@ -1,3 +1,4 @@
+import styles from "./QuestionNavigation.module.css";
 const QuestionNavigation = ({
     questions,
     selectedAnswers,
@@ -6,10 +7,11 @@ const QuestionNavigation = ({
     onQuestionSelect,
 }) => {
     const getNavButtonClass = (idx) => {
-        let classes = "nav-dot";
+        let classes = styles.navDot;
 
+        // “active” state:
         if (currentIndex === idx) {
-            classes += " active";
+            classes += ` ${styles.navDotActive}`;
         }
 
         const question = questions[idx];
@@ -18,15 +20,15 @@ const QuestionNavigation = ({
         if (submitted) {
             const answer = question.answers.find((a) => a.id === ansId);
             if (answer && answer.score === "1.00") {
-                classes += " correct";
+                classes += ` ${styles.navDotActiveCorrect}`;
             } else {
-                classes += " incorrect";
+                classes += ` ${styles.navDotActiveIncorrect}`;
             }
         } else {
-            if (ansId === undefined || ansId === null) {
-                classes += " unanswered";
+            if (ansId == null) {
+                classes += ` ${styles.navDotUnanswered}`;
             } else {
-                classes += " answered";
+                classes += ` ${styles.navDotAnswered}`;
             }
         }
 
@@ -34,7 +36,10 @@ const QuestionNavigation = ({
     };
 
     return (
-        <nav className="question-nav" aria-label="Navigazione tra le domande">
+        <nav
+            className={styles.questionNav}
+            aria-label="Navigazione tra le domande"
+        >
             {questions.map((q, idx) => (
                 <button
                     key={q.id}

@@ -1,9 +1,16 @@
+import styles from "./LoadingSpinner.module.css";
 const LoadingSpinner = () => {
     return (
-        <main className="quiz-container" aria-busy="true" aria-live="polite">
+        <main
+            className={styles.quizContainer}
+            aria-busy="true"
+            aria-live="polite"
+        >
             <div role="status">
-                <div className="loading" aria-hidden="true"></div>
-                <span className="sr-only">Caricamento del quiz in corso…</span>
+                <div className={styles.loading} aria-hidden="true"></div>
+                <span className={styles.srOnly}>
+                    Caricamento del quiz in corso…
+                </span>
             </div>
         </main>
     );

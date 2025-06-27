@@ -1,8 +1,9 @@
+import styles from "./MobileNavigationButton.module.css";
 const MobileNavigationButton = ({
     direction,
     onClick,
     disabled,
-    className = "nav-button",
+    className = styles.navButton,
     children,
 }) => {
     const ariaLabel =

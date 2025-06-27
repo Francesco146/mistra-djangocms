@@ -1,7 +1,6 @@
-import "@styles/QuizList.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import styles from "./QuizListPage.module.css";
 function QuizListPage() {
     const [tests, setTests] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -25,26 +24,26 @@ function QuizListPage() {
     };
 
     return (
-        <main className="quiz-container" aria-busy={loading} aria-live="polite">
-            <h1 className="quiz-title">Quiz Disponibili</h1>
+        <main className={styles.quizContainer} aria-busy={loading} aria-live="polite">
+            <h1 className={styles.quizTitle}>Quiz Disponibili</h1>
 
             {loading ? (
                 <div role="status">
-                    <div className="loading" aria-hidden="true"></div>
+                    <div className={styles.loading} aria-hidden="true"></div>
                     <span className="sr-only">
                         Caricamento dei quiz in corso…
                     </span>
                 </div>
             ) : (
-                <ul className="quiz-list">
+                <ul className={styles.quizList}>
                     {tests.map((test) => (
-                        <li className="quiz-card" key={test.id}>
-                            <h2 className="quiz-name">{test.name}</h2>
-                            <p className="quiz-description">
+                        <li className={styles.quizCard} key={test.id}>
+                            <h2 className={styles.quizName}>{test.name}</h2>
+                            <p className={styles.quizDescription}>
                                 {test.description}
                             </p>
                             <button
-                                className="quiz-button"
+                                className={styles.quizButton}
                                 aria-label={`Inizia il quiz ${test.name}`}
                                 onClick={() => handleStartQuiz(test.id)}
                             >

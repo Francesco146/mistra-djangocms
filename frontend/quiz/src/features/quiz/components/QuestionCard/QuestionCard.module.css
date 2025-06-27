@@ -1,0 +1,68 @@
+/* QuestionCard.module.css */
+
+.questionCard {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-light);
+    padding: var(--spacing-md);
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.questionTitle {
+    font-size: 1.75rem;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.questionText {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.answerSection {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.correctionText {
+    margin-top: var(--spacing-md);
+    font-size: 1rem;
+}
+
+.feedbackCorrect strong {
+    color: var(--color-answer-correct);
+}
+
+.feedbackIncorrect strong {
+    color: var(--color-answer-incorrect);
+}
+
+.progressContainer {
+    width: 100%;
+    height: 6px;
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: var(--spacing-md);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.progressBar {
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        var(--color-primary),
+        var(--color-primary-hover)
+    );
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+}

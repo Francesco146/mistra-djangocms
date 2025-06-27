@@ -1,7 +1,10 @@
+import styles from "./NavigationButton.module.css";
 const NavigationButton = ({ direction, onClick, disabled, children }) => {
     return (
         <button
-            className={`nav-button nav-button--${direction}`}
+            className={`${styles.navButton} ${
+                styles[`navButton--${direction}`]
+            }`}
             onClick={onClick}
             disabled={disabled}
             aria-label={

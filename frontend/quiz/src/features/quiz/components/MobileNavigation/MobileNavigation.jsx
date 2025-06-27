@@ -1,5 +1,5 @@
 import { MobileNavigationButton } from "@components/ui";
-
+import styles from "./MobileNavigation.module.css";
 const MobileNavigation = ({
     currentIndex,
     questionsLength,
@@ -7,7 +7,7 @@ const MobileNavigation = ({
     onNext,
 }) => {
     return (
-        <div className="mobile-nav" aria-hidden="false">
+        <div className={styles.mobileNav} aria-hidden="false">
             <MobileNavigationButton
                 direction="prev"
                 onClick={onPrevious}

@@ -1,7 +1,6 @@
-import "@styles/QuizStartPage.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import styles from "./QuizStartPage.module.css";
 function QuizStartPage() {
     const { id } = useParams();
     const [age, setAge] = useState("");
@@ -33,17 +32,17 @@ function QuizStartPage() {
     };
 
     if (loading) {
-        return <div className="quiz-start-loading">Caricamento…</div>;
+        return <div className={styles.quizStartLoading}>Caricamento…</div>;
     }
     if (error) {
-        return <div className="quiz-start-error">{error}</div>;
+        return <div className={styles.quizStartError}>{error}</div>;
     }
 
     return (
-        <main className="quiz-start-container">
+        <main className={styles.quizStartContainer}>
             <h1>Prima di iniziare…</h1>
-            <form className="quiz-start-form" onSubmit={handleSubmit}>
-                <div className="form-group">
+            <form className={styles.quizStartForm} onSubmit={handleSubmit}>
+                <div className={styles.formGroup}>
                     <label htmlFor="age">Età</label>
                     <input
                         id="age"
@@ -55,10 +54,10 @@ function QuizStartPage() {
                         required
                     />
                 </div>
-                <fieldset className="form-group">
+                <fieldset className={styles.formGroup}>
                     <legend>Sesso</legend>
                     {sexChoices.map((choice) => (
-                        <label key={choice.id} className="radio-label">
+                        <label key={choice.id} className={styles.radioLabel}>
                             <input
                                 type="radio"
                                 name="sex"
@@ -73,7 +72,7 @@ function QuizStartPage() {
                 </fieldset>
                 <button
                     type="submit"
-                    className="quiz-start-button"
+                    className={styles.quizStartButton}
                     disabled={!age || !sex}
                 >
                     Inizia quiz

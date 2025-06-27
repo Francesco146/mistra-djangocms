@@ -1,0 +1,45 @@
+/* MobileNavigationButton.module.css */
+
+/* Base mobile-nav button (from .mobile-nav .nav-button) */
+.navButton {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    box-shadow: var(--shadow-light);
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex: 1;
+    max-width: calc((100% - var(--spacing-md) * 2 - var(--spacing-sm)) / 2);
+    height: 3.5rem;
+}
+
+/* Hover & focus */
+.navButton:hover,
+.navButton:focus {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    outline: none;
+}
+.navButton:focus-visible {
+    outline: 3px solid var(--color-primary-hover);
+    outline-offset: 2px;
+}
+
+/* Disabled */
+.navButton:disabled {
+    background: #6c757d;
+    color: #fff;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.navButton:disabled:hover,
+.navButton:disabled:focus {
+    background: #6c757d;
+    transform: none;
+}

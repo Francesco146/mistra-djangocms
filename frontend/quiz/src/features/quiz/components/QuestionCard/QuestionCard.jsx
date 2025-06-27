@@ -1,6 +1,6 @@
 import { AnswerOption, QuestionNavigation } from "@features/components";
 import DomPurify from "dompurify";
-
+import styles from "./QuestionCard.module.css";
 const QuestionCard = ({
     question,
     questions,
@@ -21,21 +21,21 @@ const QuestionCard = ({
 
     return (
         <div
-            className="question-card"
+            className={styles.questionCard}
             role="group"
             aria-labelledby={`question-title-${question.id}`}
         >
-            <h2 id={`question-title-${question.id}`} className="question-title">
+            <h2 id={`question-title-${question.id}`} className={styles.questionTitle}>
                 {question.name}
             </h2>
             <div
-                className="question-text"
+                className={styles.questionText}
                 dangerouslySetInnerHTML={{
                     __html: DomPurify.sanitize(question.text),
                 }}
             />
 
-            <fieldset className="answer-section">
+            <fieldset className={styles.answerSection}>
                 <legend className="sr-only">
                     Opzioni per "{question.name}"
                 </legend>
@@ -61,8 +61,8 @@ const QuestionCard = ({
 
             {submitted && (
                 <div
-                    className={`correction-text ${
-                        isCorrect ? "feedback-correct" : "feedback-incorrect"
+                    className={`${styles.correctionText} ${
+                        isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect
                     }`}
                 >
                     <strong>{isCorrect ? "Corretto!" : "Sbagliato!"}</strong>
@@ -70,9 +70,9 @@ const QuestionCard = ({
                 </div>
             )}
 
-            <div className="progress-container" aria-hidden="true">
+            <div className={styles.progressContainer} aria-hidden="true">
                 <div
-                    className="progress-bar"
+                    className={styles.progressBar}
                     style={{
                         width: `${
                             ((currentIndex + 1) / questions.length) * 100
