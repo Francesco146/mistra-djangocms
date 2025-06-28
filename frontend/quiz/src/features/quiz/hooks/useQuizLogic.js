@@ -14,6 +14,9 @@ export const useQuizLogic = (id) => {
     const [userSex, setUserSex] = useState(
         () => localStorage.getItem("quizUserSex") || ""
     );
+    const [backendResults, setBackendResults] = useState({});
+    const [backendScore, setBackendScore] = useState(null);
+    const [executionId, setExecutionId] = useState(null);
 
     useEffect(() => {
         setUserAge(localStorage.getItem("quizUserAge") || "");
@@ -71,7 +74,7 @@ export const useQuizLogic = (id) => {
         [currentIndex, submitted, questions]
     );
 
-    const handleSubmit = useCallback(() => {
+    const handleSubmit = useCallback(async () => {
         const allAnswered =
             questions.length > 0 &&
             questions.every(
@@ -90,16 +93,44 @@ export const useQuizLogic = (id) => {
             );
             return;
         }
-        console.log("All questions answered:", selectedAnswers);
-        console.log("User age:", userAge, "User sex:", sexID);
+
         let endTimestamp = Date.now();
-        console.log(
-            "Duration (minutes):",
-            (endTimestamp - startTimestamp) / 60000
-        );
-        setSubmitted(true);
-        setSubmitTimestamp(endTimestamp);
-    }, [selectedAnswers, questions, startTimestamp, userAge, userSex]);
+        const durationMinutes = (endTimestamp - startTimestamp) / 60000;
+
+        const submissionData = {
+            quiz_id: parseInt(id),
+            sex_id: parseInt(sexID),
+            age: parseInt(userAge),
+            start_time: new Date(startTimestamp).toISOString(),
+            duration_minutes: durationMinutes,
+            answers: selectedAnswers,
+        };
+
+        try {
+            const response = await fetch("http://localhost:8000/api/submit-quiz/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(submissionData),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit quiz");
+            }
+
+            const data = await response.json();
+
+            setBackendResults(data.results);
+            setBackendScore(data.score);
+            setExecutionId(data.execution_id);
+            setSubmitted(true);
+            setSubmitTimestamp(endTimestamp);
+        } catch (error) {
+            console.error("Error submitting quiz:", error);
+            alert("Errore durante l'invio del quiz. Riprova.");
+        }
+    }, [selectedAnswers, questions, startTimestamp, userAge, userSex, id]);
 
     const handleRetry = useCallback(() => {
         setSelectedAnswers({});
@@ -107,6 +138,9 @@ export const useQuizLogic = (id) => {
         setSubmitted(false);
         setStartTimestamp(Date.now());
         setSubmitTimestamp(null);
+        setBackendResults({});
+        setBackendScore(null);
+        setExecutionId(null);
         localStorage.removeItem("quizUserAge");
         localStorage.removeItem("quizUserSex");
         localStorage.removeItem("quizUserSexID");
@@ -114,12 +148,9 @@ export const useQuizLogic = (id) => {
         setUserSex("");
     }, []);
 
-    const correctCount = questions.reduce((acc, q) => {
-        const ansId = selectedAnswers[q.id];
-        if (!ansId) return acc;
-        const ans = q.answers.find((a) => a.id === ansId);
-        return acc + (ans && ans.score === "1.00" ? 1 : 0);
-    }, 0);
+    const correctCount = Object.values(backendResults).filter(
+        (result) => result === true
+    ).length;
 
     return {
         questions,
@@ -138,5 +169,8 @@ export const useQuizLogic = (id) => {
         submitTimestamp,
         userAge,
         userSex,
+        backendResults,
+        backendScore,
+        executionId,
     };
 };

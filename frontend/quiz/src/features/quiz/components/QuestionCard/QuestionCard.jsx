@@ -9,11 +9,15 @@ const QuestionCard = ({
     submitted,
     onAnswerSelect,
     onQuestionSelect,
+    backendResults = {},
 }) => {
     const currentSelectionId = selectedAnswers[question.id];
     const currentAnswerObj =
         question.answers.find((a) => a.id === currentSelectionId) || {};
-    const isCorrect = currentAnswerObj.score === "1.00";
+
+    // Use backendResults for correction
+    const isCorrect =
+        submitted && backendResults && backendResults[question.id] === true;
 
     const answersToShow = submitted
         ? question.answers.filter((a) => a.id === currentSelectionId)
@@ -25,7 +29,10 @@ const QuestionCard = ({
             role="group"
             aria-labelledby={`question-title-${question.id}`}
         >
-            <h2 id={`question-title-${question.id}`} className={styles.questionTitle}>
+            <h2
+                id={`question-title-${question.id}`}
+                className={styles.questionTitle}
+            >
                 {question.name}
             </h2>
             <div
@@ -57,12 +64,15 @@ const QuestionCard = ({
                 currentIndex={currentIndex}
                 submitted={submitted}
                 onQuestionSelect={onQuestionSelect}
+                backendResults={backendResults}
             />
 
             {submitted && (
                 <div
                     className={`${styles.correctionText} ${
-                        isCorrect ? styles.feedbackCorrect : styles.feedbackIncorrect
+                        isCorrect
+                            ? styles.feedbackCorrect
+                            : styles.feedbackIncorrect
                     }`}
                 >
                     <strong>{isCorrect ? "Corretto!" : "Sbagliato!"}</strong>

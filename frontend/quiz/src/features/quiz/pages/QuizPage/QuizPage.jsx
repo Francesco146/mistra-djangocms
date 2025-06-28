@@ -27,12 +27,23 @@ function QuizPage() {
         handleRetry,
         userAge,
         userSex,
+        backendResults,
+        backendScore,
+        executionId,
     } = useQuizLogic(id);
 
     const { generatePDF } = usePDFGenerator();
 
     const handleSavePDF = () => {
-        generatePDF(questions, selectedAnswers, id, userAge, userSex);
+        generatePDF(
+            questions,
+            selectedAnswers,
+            executionId,
+            userAge,
+            userSex,
+            backendResults,
+            backendScore
+        );
     };
 
     const handleRetryAndGoToStart = () => {
@@ -74,6 +85,7 @@ function QuizPage() {
                         submitted={submitted}
                         onAnswerSelect={handleAnswerSelect}
                         onQuestionSelect={setCurrentIndex}
+                        backendResults={backendResults}
                     />
                 </div>
 
@@ -113,6 +125,7 @@ function QuizPage() {
                         totalQuestions={questions.length}
                         onRetry={handleRetryAndGoToStart}
                         onSavePDF={handleSavePDF}
+                        backendScore={backendScore}
                     />
                 )}
             </div>

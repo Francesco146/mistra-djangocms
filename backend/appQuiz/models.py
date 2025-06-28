@@ -33,14 +33,6 @@ class Test(models.Model):
     questions = models.ManyToManyField(Question, related_name="tests")
 
 
-# QuestionInTest(*id_question,*id_text)
-# class QuestionInText(models.Model):
-#    id_question = models.ForeignKey(Question, on_delete=models.CASCADE)
-#    id_text = models.ForeignKey(Test, on_delete=models.CASCADE)
-# Invece di fare così Django permette di evitare la relazione tramite il campo 'ManyToManyField'
-# Django crea automaticamente una tabella intermedia simile a QuestionInText, che lega Test e Question, usando le loro chiavi primarie come chiave composta.
-
-
 # Sex(*id,name)
 class Sex(models.Model):
     name = models.CharField(max_length=255)
@@ -57,3 +49,13 @@ class TestExecution(models.Model):
     duration = models.FloatField(help_text="Tempo in minuti")
     revision_date = models.DateTimeField(null=True, blank=True)
     note = models.TextField(blank=True, null=True)
+
+
+# GivenAnswer(*id, id_test_execution, id_question, id_answer)
+class GivenAnswer(models.Model):
+    test_execution = models.ForeignKey(TestExecution, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.test_execution.id} - Q{self.question.id} → A{self.answer.id if self.answer else 'Non ha risposto'}"

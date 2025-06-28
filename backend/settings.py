@@ -1,5 +1,6 @@
-from pathlib import Path
 import os
+from pathlib import Path
+
 import dj_database_url
 from django_storage_url import dsn_configured_storage_class
 

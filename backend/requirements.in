@@ -36,3 +36,4 @@ django-ckeditor>=6.7.0
 django-cors-headers
 
 django-vite
+django-ipware
