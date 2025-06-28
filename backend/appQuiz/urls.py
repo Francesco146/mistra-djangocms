@@ -12,5 +12,5 @@ router.register(r"categories", TestExecutionViewSet)
 router.register(r"sex", SexViewSet)
 
 urlpatterns = router.urls + [
-        path("submit-quiz/", submit_quiz),  
+        path("submit-quiz/", submit_quiz),
 ]
