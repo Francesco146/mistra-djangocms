@@ -5,11 +5,12 @@ const QuestionNavigation = ({
     currentIndex,
     submitted,
     onQuestionSelect,
+    backendResults = {},
 }) => {
     const getNavButtonClass = (idx) => {
         let classes = styles.navDot;
 
-        // “active” state:
+        // "active" state:
         if (currentIndex === idx) {
             classes += ` ${styles.navDotActive}`;
         }
@@ -18,8 +19,8 @@ const QuestionNavigation = ({
         const ansId = selectedAnswers[question.id];
 
         if (submitted) {
-            const answer = question.answers.find((a) => a.id === ansId);
-            if (answer && answer.score === "1.00") {
+            const isCorrect = backendResults[question.id] === true;
+            if (isCorrect) {
                 classes += ` ${styles.navDotActiveCorrect}`;
             } else {
                 classes += ` ${styles.navDotActiveIncorrect}`;

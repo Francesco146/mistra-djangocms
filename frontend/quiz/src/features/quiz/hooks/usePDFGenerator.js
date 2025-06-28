@@ -4,7 +4,7 @@ import { useCallback } from "react";
 
 export const usePDFGenerator = () => {
     const generatePDF = useCallback(
-        (questions, selectedAnswers, quizId, age, sex) => {
+        (questions, selectedAnswers, executionId, age, sex) => {
             const pdf = new jsPDF({
                 unit: "pt",
                 format: "a4",
@@ -40,9 +40,9 @@ export const usePDFGenerator = () => {
 
                 pdf.setFontSize(12);
                 pdf.setFont(undefined, "bold");
-                pdf.text(`ID Test:`, margin, cursorY);
+                pdf.text(`ID Esecuzione Test:`, margin, cursorY);
                 pdf.setFont(undefined, "normal");
-                pdf.text(`${quizId}`, margin + 70, cursorY);
+                pdf.text(`${executionId}`, margin + 70, cursorY);
 
                 pdf.setFont(undefined, "bold");
                 pdf.text(`Età:`, margin + 200, cursorY);
@@ -88,7 +88,7 @@ export const usePDFGenerator = () => {
                     cursorY += lineHeight + 10;
                 });
 
-                pdf.save(`risultati_quiz_${quizId}.pdf`);
+                pdf.save(`risultati_esecuzione_${executionId}.pdf`);
             };
         },
         []

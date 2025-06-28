@@ -6,14 +6,15 @@ const AnswerOption = ({
     isSelected,
     submitted,
     onSelect,
+    backendResults = {},
 }) => {
     let extraClass = "";
 
     if (submitted) {
-        extraClass =
-            answer.score === "1.00"
-                ? styles["answerOption--correct"]
-                : styles["answerOption--incorrect"];
+        const isCorrect = backendResults[question.id] === true;
+        extraClass = isCorrect
+            ? styles["answerOption--correct"]
+            : styles["answerOption--incorrect"];
     } else if (isSelected) {
         extraClass = styles["answerOption--selected"];
     }
