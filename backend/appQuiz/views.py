@@ -72,7 +72,11 @@ def submit_quiz(request):
         for question_id_str, answer_id in answers.items():
             q_id = int(question_id_str)
             question = Question.objects.get(id=q_id)
-            given_answer = Answer.objects.get(id=answer_id, id_question=question)
+            # TODO: handle answer_id = -1 (Non rispondo)
+            if answer_id == "-1":
+                ...
+            else:
+                given_answer = Answer.objects.get(id=answer_id, id_question=question)
 
             max_score = Answer.objects.filter(id_question=question).aggregate(
                 Max("score")
