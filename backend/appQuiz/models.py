@@ -1,6 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 
+
 # Category (*id,nome)
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -54,7 +55,7 @@ class TestExecution(models.Model):
 class GivenAnswer(models.Model):
     test_execution = models.ForeignKey(TestExecution, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.test_execution.id} - Q{self.question.id} → A{self.answer.id}"
+        return f"{self.test_execution.id} - Q{self.question.id} → A{self.answer.id if self.answer else 'Non ha risposto'}"

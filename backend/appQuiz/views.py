@@ -72,19 +72,19 @@ def submit_quiz(request):
         for question_id_str, answer_id in answers.items():
             q_id = int(question_id_str)
             question = Question.objects.get(id=q_id)
-            # TODO: handle answer_id = -1 (Non rispondo)
-            if answer_id == "-1":
-                ...
+            if str(answer_id) == "-1":
+                given_answer = None
             else:
                 given_answer = Answer.objects.get(id=answer_id, id_question=question)
 
             max_score = Answer.objects.filter(id_question=question).aggregate(
                 Max("score")
             )["score__max"]
-            is_correct = given_answer.score == max_score
+            is_correct = given_answer and given_answer.score == max_score
 
             correctness_map[q_id] = is_correct
-            total_score += float(given_answer.score)
+            if given_answer:
+                total_score += float(given_answer.score)
 
         # CREA esecuzione
         exec = TestExecution.objects.create(
@@ -100,8 +100,10 @@ def submit_quiz(request):
         for question_id_str, answer_id in answers.items():
             q_id = int(question_id_str)
             question = Question.objects.get(id=q_id)
-            answer = Answer.objects.get(id=answer_id)
-
+            if str(answer_id) == "-1":
+                answer = None
+            else:
+                answer = Answer.objects.get(id=answer_id)
             GivenAnswer.objects.create(
                 test_execution=exec, question=question, answer=answer
             )

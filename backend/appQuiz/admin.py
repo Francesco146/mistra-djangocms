@@ -1,12 +1,13 @@
 from django.contrib import admin
+
 from .models import (
-    Test,
-    Question,
     Answer,
     Category,
-    TestExecution,
     GivenAnswer,
+    Question,
     Sex,
+    Test,
+    TestExecution,
 )
 
 
@@ -16,7 +17,7 @@ class AnswerInline(admin.TabularInline):
 
 
 class QuestionInline(admin.TabularInline):
-    model = Test.questions.through  
+    model = Test.questions.through
     extra = 1
 
 
@@ -33,13 +34,20 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
-    exclude = ("questions",)  
+    exclude = ("questions",)
+
 
 class GivenAnswerInline(admin.TabularInline):
     model = GivenAnswer
     extra = 0
-    fields = ("question", "answer")
-    readonly_fields = ("question", "answer")
+    fields = ("question", "display_answer")
+    readonly_fields = ("question", "display_answer")
+
+    def display_answer(self, obj):
+        return obj.answer.text if obj.answer else "Non ha risposto"
+
+    display_answer.short_description = "Risposta"
+
 
 @admin.register(TestExecution)
 class TestExecutionAdmin(admin.ModelAdmin):
