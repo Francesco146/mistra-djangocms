@@ -42,7 +42,7 @@ export const usePDFGenerator = () => {
                 pdf.setFont(undefined, "bold");
                 pdf.text(`ID Esecuzione Test:`, margin, cursorY);
                 pdf.setFont(undefined, "normal");
-                pdf.text(`${executionId}`, margin + 70, cursorY);
+                pdf.text(`${executionId}`, margin + 120, cursorY);
 
                 pdf.setFont(undefined, "bold");
                 pdf.text(`Età:`, margin + 200, cursorY);
