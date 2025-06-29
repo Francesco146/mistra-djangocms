@@ -29,19 +29,21 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
+    list_display = ("id", "name", "get_category_name")
 
 
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
     exclude = ("questions",)
+    list_display = ("id", "name", "question_count")
 
 
 class GivenAnswerInline(admin.TabularInline):
     model = GivenAnswer
     extra = 0
-    fields = ("question", "display_answer")
-    readonly_fields = ("question", "display_answer")
+    fields = ("get_question_name", "display_answer")
+    readonly_fields = ("get_question_name", "display_answer")
 
     def display_answer(self, obj):
         return obj.answer.text if obj.answer else "Non ha risposto"
@@ -51,7 +53,16 @@ class GivenAnswerInline(admin.TabularInline):
 
 @admin.register(TestExecution)
 class TestExecutionAdmin(admin.ModelAdmin):
-    list_display = ("id", "test", "age", "score", "IP", "duration", "execution_time")
+    list_display = (
+        "id",
+        "test",
+        "age",
+        "score_formatted",
+        "IP",
+        "duration_formatted",
+        "formatted_execution_time",
+        "passed",
+    )
     readonly_fields = ("execution_time",)
     inlines = [GivenAnswerInline]
 
