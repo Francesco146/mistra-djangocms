@@ -1,5 +1,7 @@
 {% load sekizai_tags django_vite %}
 
+{% addtoblock "css" %}{% vite_asset 'src/styles/global.css' %}{% endaddtoblock %}
+
 {# order of imports is critical #}
 {% addtoblock "js" %} {% vite_hmr_client %} {% endaddtoblock %}
 {% addtoblock "js" %} {% vite_react_refresh %} {% endaddtoblock %}
