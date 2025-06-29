@@ -110,6 +110,47 @@ textarea {
     border: 0;
 }
 
+/* ─── HTML from the server ────────────────────────────────────────────────── */
+
+table,
+th,
+td {
+    border: 1px solid #333;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 0.75rem;
+}
+
+blockquote {
+    margin: 1.5em 2em;
+    padding: 0.75em 1em;
+    border-left: 4px solid #ccc;
+    background: #f9f9f9;
+    color: #555;
+    font-style: italic;
+}
+
+blockquote::before {
+    content: "“";
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.1em;
+    vertical-align: -0.4em;
+    color: #ccc;
+}
+
+blockquote::after {
+    content: "”";
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-left: 0.1em;
+    vertical-align: -0.4em;
+    color: #ccc;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
     *,
