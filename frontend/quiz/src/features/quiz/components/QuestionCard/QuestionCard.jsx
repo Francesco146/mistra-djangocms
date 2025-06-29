@@ -1,6 +1,10 @@
 import { AnswerOption, QuestionNavigation } from "@features/components";
 import DomPurify from "dompurify";
+import { useEffect, useRef, useState } from "react";
 import styles from "./QuestionCard.module.css";
+
+const PREVIEW_LINES = 5;
+
 const QuestionCard = ({
     question,
     questions,
@@ -23,6 +27,20 @@ const QuestionCard = ({
         ? question.answers.filter((a) => a.id === currentSelectionId)
         : question.answers;
 
+    // read more toggle
+    const [showToggle, setShowToggle] = useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const textRef = useRef(null);
+
+    // after mount, check if content overflows our preview
+    useEffect(() => {
+        const el = textRef.current;
+        if (el) {
+            const isOverflowing = el.scrollHeight > el.clientHeight + 1;
+            setShowToggle(isOverflowing);
+        }
+    }, [question.text]);
+
     return (
         <div
             className={styles.questionCard}
@@ -35,14 +53,38 @@ const QuestionCard = ({
             >
                 {question.name}
             </h2>
-            <div
-                className={styles.questionText}
-                dangerouslySetInnerHTML={{
-                    __html: DomPurify.sanitize(question.text),
-                }}
-            />
 
-            <fieldset className={styles.answerSection}>
+            <div className={styles.questionTextWrapper}>
+                <div
+                    id={`question-text-${question.id}`}
+                    className={
+                        `${styles.questionText} ` +
+                        (expanded ? styles.expanded : "")
+                    }
+                    ref={textRef}
+                    role="region"
+                    aria-labelledby={`question-title-${question.id}`}
+                    dangerouslySetInnerHTML={{
+                        __html: DomPurify.sanitize(question.text),
+                    }}
+                />
+                {showToggle && (
+                    <button
+                        className={styles.toggleButton}
+                        onClick={() => setExpanded((e) => !e)}
+                        aria-expanded={expanded}
+                        aria-controls={`question-text-${question.id}`}
+                    >
+                        {expanded ? "Mostra meno" : "Leggi di più"}
+                    </button>
+                )}
+            </div>
+
+            <fieldset
+                id={`answers-${question.id}`}
+                className={styles.answerSection}
+                aria-describedby={`question-text-${question.id}`}
+            >
                 <legend className="sr-only">
                     Opzioni per "{question.name}"
                 </legend>

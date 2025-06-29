@@ -5,10 +5,12 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow-light);
     padding: var(--spacing-md);
-    height: 60vh;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 .questionTitle {
@@ -18,12 +20,52 @@
     margin-bottom: var(--spacing-sm);
 }
 
+/* ─── Question text + Read more ─────────────────────────────────── */
+
+.questionTextWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .questionText {
     font-size: 1.125rem;
-    color: var(--color-text-secondary);
     line-height: 1.6;
-    flex: 1;
+    color: var(--color-text-secondary);
+
+    /* clamp to PREVIEW_LINES */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.questionText.expanded {
+    /* remove clamp */
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+}
+
+.toggleButton {
+    margin-top: var(--spacing-sm);
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    cursor: pointer;
+    align-self: flex-start;
+}
+.toggleButton:hover,
+.toggleButton:focus {
+    text-decoration: underline;
+}
+
+/* ─── Answers & Feedback ─────────────────────────────────────────── */
 
 .answerSection {
     margin-top: var(--spacing-md);
@@ -32,18 +74,7 @@
     gap: var(--spacing-sm);
 }
 
-.correctionText {
-    margin-top: var(--spacing-md);
-    font-size: 1rem;
-}
-
-.feedbackCorrect strong {
-    color: var(--color-answer-correct);
-}
-
-.feedbackIncorrect strong {
-    color: var(--color-answer-incorrect);
-}
+/* ─── Progress Bar ───────────────────────────────────────────────── */
 
 .progressContainer {
     width: 100%;
