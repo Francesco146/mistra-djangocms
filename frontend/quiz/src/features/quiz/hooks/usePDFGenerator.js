@@ -1,4 +1,7 @@
-import favicon from "@assets/images/favicon.png";
+// We use the '?inline' query to force Vite to import the image as a base64 data URL.
+// This is necessary because the React app is embedded as a Django CMS plugin,
+// and may be served from a different host or path than the Vite dev server.
+import favicon from "@assets/images/favicon.png?inline";
 import jsPDF from "jspdf";
 import { useCallback } from "react";
 
