@@ -1,5 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
+function shuffle(array) {
+    const arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
 export const useQuizLogic = (id) => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,19 +36,21 @@ export const useQuizLogic = (id) => {
         fetch(`http://localhost:8000/api/tests/${id}/`)
             .then((res) => res.json())
             .then((data) => {
-                const questionsWithNoAnswer = data.questions.map((q) => ({
-                    ...q,
-                    answers: [
-                        ...q.answers,
-                        {
-                            id: -1,
-                            text: "Non rispondo",
-                            score: "0.00",
-                            correction: "",
-                        },
-                    ],
-                }));
-                setQuestions(questionsWithNoAnswer);
+                const shuffledQuestions = shuffle(
+                    data.questions.map((q) => ({
+                        ...q,
+                        answers: shuffle([
+                            ...q.answers,
+                            {
+                                id: -1,
+                                text: "Non rispondo",
+                                score: "0.00",
+                                correction: "",
+                            },
+                        ]),
+                    }))
+                );
+                setQuestions(shuffledQuestions);
                 setSelectedAnswers({});
                 setLoading(false);
                 setStartTimestamp(Date.now());
@@ -107,13 +118,16 @@ export const useQuizLogic = (id) => {
         };
 
         try {
-            const response = await fetch("http://localhost:8000/api/submit-quiz/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(submissionData),
-            });
+            const response = await fetch(
+                "http://localhost:8000/api/submit-quiz/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(submissionData),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to submit quiz");
