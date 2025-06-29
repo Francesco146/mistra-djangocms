@@ -28,14 +28,12 @@ django==5.2.3
     # via
     #   -r requirements.in
     #   dj-database-url
-    #   django-ckeditor
     #   django-classy-tags
     #   django-cms
     #   django-cors-headers
     #   django-entangled
     #   django-filer
     #   django-formtools
-    #   django-js-asset
     #   django-parler
     #   django-polymorphic
     #   django-sekizai
@@ -47,8 +45,6 @@ django==5.2.3
     #   djangocms-alias
     #   djangorestframework
     #   easy-thumbnails
-django-ckeditor==6.7.3
-    # via -r requirements.in
 django-classy-tags==4.1.0
     # via
     #   django-cms
@@ -72,8 +68,6 @@ django-formtools==2.5.1
     # via django-cms
 django-ipware==7.0.1
     # via -r requirements.in
-django-js-asset==3.1.2
-    # via django-ckeditor
 django-parler==2.3
     # via djangocms-alias
 django-polymorphic==4.1.0

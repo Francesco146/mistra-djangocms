@@ -1,5 +1,5 @@
-from ckeditor.fields import RichTextField
 from django.db import models
+from djangocms_text.fields import HTMLField
 
 
 # Category (*id,nome)
@@ -16,7 +16,7 @@ class Category(models.Model):
 # Question (*id,name,text,id_category)
 class Question(models.Model):
     name = models.CharField(max_length=255)
-    text = RichTextField()  # Contenuto HTML
+    text = HTMLField()
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
