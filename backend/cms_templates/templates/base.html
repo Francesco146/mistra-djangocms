@@ -1,35 +1,52 @@
-<!DOCTYPE html>{% load cms_tags menu_tags sekizai_tags static i18n %}{% spaceless %}
-    <html lang="{{ LANGUAGE_CODE }}">
-        <head>
-            <meta charset="utf-8"/>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-            <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" >
-            {% block meta %}
-                <meta name="description" content="{% page_attribute meta_description %}"/>
-                <meta property="og:type" content="website"/>
-                <meta property="og:title" content="{% page_attribute "page_title" %}"/>
-                <meta property="og:description" content="{% page_attribute meta_description %}"/>
-            {% endblock meta %}
-            {% block canonical_url %}
-                <link rel="canonical" href="{{ request.build_absolute_uri }}"/>
-                <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
-            {% endblock canonical_url %}
-            {% block fb_meta %}{% endblock fb_meta %}
-            <title>{% block title %}{% page_attribute "page_title" %}{% endblock %}</title>
-            {% block base_css %}{% endblock %}
-{% endspaceless %}{% render_block 'css' %}{% spaceless %}
-    {% block page_head %}{% endblock %}
+<!DOCTYPE html>{% load cms_tags menu_tags sekizai_tags djangocms_alias_tags i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>{% page_attribute "page_title" %} | Centro MISTRA</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" >
+      {% addtoblock "css" %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">{% endaddtoblock %}
+      {% render_block 'css' %}
+        <style>
+            :root {
+                --bs-body-font-size: 1.1rem;
+                --bs-primary: #003449;
+                --bs-primary-rgb: 0, 52, 73;
+                --bs-secondary: #2B6CA3;
+                --bs-secondary-rgb: 43, 108, 163;
+            }
+            main {
+                color: var(--bs-primary);
+            }
+            #root {
+              color: initial
+            }
+        </style>
     </head>
-    <body {% block body_attrs %}{% endblock %}>
-{% endspaceless %}{% cms_toolbar %}{% spaceless %}
-    {% block navbar %}{% endblock %}
-    {% block content %}
-        {% placeholder "Content" %}
-    {% endblock content %}
-    {% block base_js %}{% endblock %}
-{% endspaceless %}{% render_block 'js' %}{% spaceless %}
-    {% block end_js %}{% endblock %}
-    {% block bottom_css %}{% endblock %}
+    <body class="d-flex flex-column min-vh-100">
+      <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="top:0; left:50%; z-index:10000;">Passa al contenuto principale</a>
+      {% cms_toolbar %}
+      {% block navbar %}{% endblock %}
+
+      {% block content %}
+        <main id="main-content" class="flex-grow-1">
+          <div class="bg-primary">
+            {% placeholder "Full width" %}
+          </div>
+          <div class="container px-md-5">
+            {% placeholder "Content" %}
+          </div>
+        </main>
+
+        <footer class="bg-secondary text-white px-4 py-4 mt-0">
+            <div class="container text-center">
+              {% static_alias 'footer' %}
+            </div>
+        </footer>
+      {% endblock content %}
+
+      {% addtoblock "js" %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock %}
+      {% render_block 'js' %}
     </body>
-  </html>{% endspaceless %}
+</html>

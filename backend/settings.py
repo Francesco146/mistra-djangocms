@@ -229,3 +229,7 @@ DJANGO_VITE = {
         "dev_mode": True,
     }
 }
+
+CMS_PAGE_CACHE = False
+CMS_PLACEHOLDER_CACHE = False
+CMS_PLUGIN_CACHE = False
