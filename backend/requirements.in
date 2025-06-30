@@ -23,6 +23,7 @@ djangocms-text
 
 # optional django CMS frontend
 djangocms-frontend
+djangocms-video
 
 django-filer
 

@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.utilities",
     "corsheaders",
     "django_vite",
+    "djangocms_video"
 ]
 
 MIDDLEWARE = [
