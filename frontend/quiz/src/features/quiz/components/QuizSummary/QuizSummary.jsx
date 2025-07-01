@@ -12,7 +12,9 @@ const QuizSummary = ({
             <p>
                 Hai risposto correttamente a <strong>{correctCount}</strong>{" "}
                 domande su <strong>{totalQuestions}</strong>. Score:{" "}
-                <strong>{backendScore}</strong>
+                <strong>
+                    {backendScore}/{totalQuestions}
+                </strong>
             </p>
             <div className={styles.summaryButtons}>
                 <button className={styles.retryButton} onClick={onRetry}>
