@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.core.exceptions import ValidationError
+from django.db.models import F
 from django.forms import BaseInlineFormSet
 
 from .models import (
@@ -11,6 +12,24 @@ from .models import (
     Test,
     TestExecution,
 )
+
+
+class PassedFilter(admin.SimpleListFilter):
+    title = "passed status"
+    parameter_name = "passed"
+
+    def lookups(self, request, model_admin):
+        return (
+            ("yes", "Passed"),
+            ("no", "Not Passed"),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == "yes":
+            return queryset.filter(score__gte=F("test__min_score"))
+        if self.value() == "no":
+            return queryset.filter(score__lt=F("test__min_score"))
+        return queryset
 
 
 class AnswerInlineFormSet(BaseInlineFormSet):
@@ -49,20 +68,28 @@ class QuestionInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("id", "name")
+    search_fields = ("name",)
+    ordering = ("name",)
 
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
     list_display = ("id", "name", "get_category_name")
+    search_fields = ("name", "text", "id_category__name")
+    list_filter = ("id_category",)
+    ordering = ("name",)
 
 
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
     exclude = ("questions",)
-    list_display = ("id", "name", "question_count")
+    list_display = ("id", "name", "question_count", "min_score")
+    search_fields = ("name", "description")
+    list_filter = ("min_score",)
+    ordering = ("name",)
 
 
 class GivenAnswerInline(admin.TabularInline):
@@ -83,6 +110,7 @@ class TestExecutionAdmin(admin.ModelAdmin):
         "id",
         "test",
         "age",
+        "sex",
         "score_formatted",
         "IP",
         "duration_formatted",
@@ -91,8 +119,41 @@ class TestExecutionAdmin(admin.ModelAdmin):
     )
     readonly_fields = ("execution_time",)
     inlines = [GivenAnswerInline]
+    search_fields = ("test__name", "IP", "note")
+    list_filter = ("test", "sex", "execution_time", PassedFilter)
+    ordering = ("-execution_time",)
+    date_hierarchy = "execution_time"
 
 
 @admin.register(Sex)
 class SexAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("id", "name")
+    search_fields = ("name",)
+    ordering = ("name",)
+
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "get_question_name", "formatted_score")
+    search_fields = ("name", "text", "id_question__name")
+    list_filter = ("score", "id_question__id_category")
+    ordering = ("id_question", "score")
+
+
+@admin.register(GivenAnswer)
+class GivenAnswerAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "get_test_name",
+        "get_question_name",
+        "get_answer_name",
+        "get_answer_score",
+    )
+    search_fields = ("test_execution__test__name", "question__name", "answer__name")
+    list_filter = (
+        "test_execution__test",
+        "question__id_category",
+        "test_execution__execution_time",
+    )
+    ordering = ("-test_execution__execution_time", "question")
+    date_hierarchy = "test_execution__execution_time"
