@@ -96,6 +96,7 @@ const QuestionCard = ({
                         isSelected={currentSelectionId === ans.id}
                         submitted={submitted}
                         onSelect={onAnswerSelect}
+                        backendResults={backendResults}
                     />
                 ))}
             </fieldset>
