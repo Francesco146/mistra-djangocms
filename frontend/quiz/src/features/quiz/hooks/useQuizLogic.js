@@ -9,6 +9,8 @@ function shuffle(array) {
     return arr;
 }
 
+const LOCAL_STORAGE_KEY = (id) => `quizState_${id}`;
+
 export const useQuizLogic = (id) => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -26,13 +28,68 @@ export const useQuizLogic = (id) => {
     const [backendResults, setBackendResults] = useState({});
     const [backendScore, setBackendScore] = useState(null);
     const [executionId, setExecutionId] = useState(null);
+    const [stateRestored, setStateRestored] = useState(false);
 
     useEffect(() => {
         setUserAge(localStorage.getItem("quizUserAge") || "");
         setUserSex(localStorage.getItem("quizUserSex") || "");
     }, [id]);
 
+    // restore state from localStorage if present
     useEffect(() => {
+        const saved = localStorage.getItem(LOCAL_STORAGE_KEY(id));
+        if (saved) {
+            try {
+                const state = JSON.parse(saved);
+                setSelectedAnswers(state.selectedAnswers || {});
+                setCurrentIndex(state.currentIndex || 0);
+                setSubmitted(state.submitted || false);
+                setStartTimestamp(state.startTimestamp || Date.now());
+                setSubmitTimestamp(state.submitTimestamp || null);
+                setBackendResults(state.backendResults || {});
+                setBackendScore(state.backendScore || null);
+                setExecutionId(state.executionId || null);
+                setStateRestored(true);
+            } catch {
+                // ignore parse errors
+                setStateRestored(true);
+            }
+        } else {
+            setStateRestored(true);
+        }
+    }, [id]);
+
+    // save state to localStorage on change (only after restoration)
+    useEffect(() => {
+        if (!stateRestored) return;
+
+        const state = {
+            selectedAnswers,
+            currentIndex,
+            submitted,
+            startTimestamp,
+            submitTimestamp,
+            backendResults,
+            backendScore,
+            executionId,
+        };
+        localStorage.setItem(LOCAL_STORAGE_KEY(id), JSON.stringify(state));
+    }, [
+        stateRestored,
+        id,
+        selectedAnswers,
+        currentIndex,
+        submitted,
+        startTimestamp,
+        submitTimestamp,
+        backendResults,
+        backendScore,
+        executionId,
+    ]);
+
+    useEffect(() => {
+        if (!stateRestored) return;
+
         fetch(`http://localhost:8000/api/tests/${id}/`)
             .then((res) => res.json())
             .then((data) => {
@@ -51,16 +108,32 @@ export const useQuizLogic = (id) => {
                     }))
                 );
                 setQuestions(shuffledQuestions);
-                setSelectedAnswers({});
                 setLoading(false);
-                setStartTimestamp(Date.now());
-                setSubmitTimestamp(null);
+
+                const hasSavedState = localStorage.getItem(
+                    LOCAL_STORAGE_KEY(id)
+                );
+                if (!hasSavedState) {
+                    const now = Date.now();
+                    setSelectedAnswers({});
+                    setCurrentIndex(0);
+                    setSubmitted(false);
+                    setStartTimestamp(now);
+                    setSubmitTimestamp(null);
+                    setBackendResults({});
+                    setBackendScore(null);
+                    setExecutionId(null);
+                } else {
+                    setStartTimestamp((prev) =>
+                        prev && prev > 0 ? prev : Date.now()
+                    );
+                }
             })
             .catch((err) => {
                 console.error("Fetch questions error:", err);
                 setLoading(false);
             });
-    }, [id]);
+    }, [id, stateRestored]);
 
     const prevQuestion = useCallback(() => {
         setCurrentIndex((i) => Math.max(i - 1, 0));
@@ -160,7 +233,8 @@ export const useQuizLogic = (id) => {
         localStorage.removeItem("quizUserSexID");
         setUserAge("");
         setUserSex("");
-    }, []);
+        localStorage.removeItem(LOCAL_STORAGE_KEY(id));
+    }, [id]);
 
     const correctCount = Object.values(backendResults).filter(
         (result) => result === true
