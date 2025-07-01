@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "djangocms_frontend.contrib.utilities",
     "corsheaders",
     "django_vite",
+    "djangocms_video"
 ]
 
 MIDDLEWARE = [
@@ -229,3 +230,7 @@ DJANGO_VITE = {
         "dev_mode": True,
     }
 }
+
+CMS_PAGE_CACHE = False
+CMS_PLACEHOLDER_CACHE = False
+CMS_PLUGIN_CACHE = False
