@@ -119,7 +119,11 @@ const QuestionCard = ({
                     }`}
                 >
                     <strong>{isCorrect ? "Corretto!" : "Sbagliato!"}</strong>
-                    <div>{currentAnswerObj.correction}</div>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DomPurify.sanitize(currentAnswerObj.correction),
+                        }}
+                    />
                 </div>
             )}
 

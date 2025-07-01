@@ -1,4 +1,5 @@
 import styles from "./AnswerOption.module.css";
+import DomPurify from "dompurify";
 
 const AnswerOption = ({
     answer,
@@ -33,7 +34,12 @@ const AnswerOption = ({
                 onChange={() => onSelect(answer.id)}
                 disabled={submitted}
             />
-            <span className={styles.answerText}>{answer.text}</span>
+            <span
+                className={styles.answerText}
+                dangerouslySetInnerHTML={{
+                    __html: DomPurify.sanitize(answer.text),
+                }}
+            />
         </label>
     );
 };
