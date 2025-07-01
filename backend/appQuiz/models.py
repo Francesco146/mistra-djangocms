@@ -1,5 +1,6 @@
 from django.db import models
 from djangocms_text.fields import HTMLField
+from django.core.exceptions import ValidationError
 
 
 # Category (*id,nome)
@@ -50,6 +51,16 @@ class Answer(models.Model):
         return f"{self.score:+.2f}"
 
     formatted_score.short_description = "Score"
+
+    def clean(self):
+        if not (-1 <= self.score <= 1):
+            raise ValidationError(
+                "Il punteggio (score) deve essere compreso tra -1 e 1."
+            )
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
 
 # Test(*id,name,description,min_score)

@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.core.exceptions import ValidationError
+from django.forms import BaseInlineFormSet
 
 from .models import (
     Answer,
@@ -11,9 +13,33 @@ from .models import (
 )
 
 
+class AnswerInlineFormSet(BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+        if any(self.errors):
+            return
+
+        has_correct_answer = False
+        for form in self.forms:
+            if not form.cleaned_data:
+                # skip empty forms
+                continue
+            if form.cleaned_data.get("DELETE", False):
+                # skip deleted forms
+                continue
+            score = form.cleaned_data.get("score")
+            if score == 1:
+                has_correct_answer = True
+                break
+
+        if not has_correct_answer:
+            raise ValidationError("Almeno una risposta deve avere score = 1.")
+
+
 class AnswerInline(admin.TabularInline):
     model = Answer
     extra = 1
+    formset = AnswerInlineFormSet
 
 
 class QuestionInline(admin.TabularInline):
