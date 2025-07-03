@@ -36,3 +36,4 @@ django-cors-headers
 
 django-vite
 django-ipware
+djangocms-rawhtml
