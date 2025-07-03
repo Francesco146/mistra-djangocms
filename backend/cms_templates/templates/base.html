@@ -10,18 +10,18 @@
         <link rel="stylesheet" href="{% static 'main.css' %}">
       {% render_block 'css' %}
     </head>
-    <body class="d-flex flex-column min-vh-100">
+    <body class="d-flex flex-column min-vh-100 bg-primary">
       <a href="#main-content" id="skip-to-main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="z-index:10000;">Passa al contenuto principale</a>
       {% cms_toolbar %}
       {% block navbar %}{% endblock %}
 
       {% block content %}
-        <main id="main-content" class="flex-grow-1">
-          <div class="bg-primary">
-            {% placeholder "Full width" %}
-          </div>
-          <div class="container px-md-5">
-            {% placeholder "Content" %}
+        <main id="main-content" class="flex-grow-1 d-flex flex-column">
+          {% placeholder "Full width" %}
+          <div class="bg-light py-1 flex-grow-1">
+            <div class="container flex-grow-1">
+              {% placeholder "Content" %}
+            </div>
           </div>
         </main>
 
@@ -49,15 +49,6 @@
             });
           }
         });
-        function setNavbarHeightVar() {
-          const header = document.querySelector('header');
-          if (header) {
-            const h = header.offsetHeight + 'px';
-            document.documentElement.style.setProperty('--navbar-header-height', h);
-          }
-        }
-        window.addEventListener('DOMContentLoaded', setNavbarHeightVar);
-        window.addEventListener('resize', setNavbarHeightVar);
         </script>
       {% endaddtoblock %}
       {% render_block 'js' %}
