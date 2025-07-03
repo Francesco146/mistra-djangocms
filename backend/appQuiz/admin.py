@@ -64,6 +64,7 @@ class AnswerInline(admin.TabularInline):
 class QuestionInline(admin.TabularInline):
     model = Test.questions.through
     extra = 1
+    autocomplete_fields = ["question"]
 
 
 @admin.register(Category)

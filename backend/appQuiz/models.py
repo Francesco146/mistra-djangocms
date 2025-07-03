@@ -21,7 +21,7 @@ class Question(models.Model):
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.id_category.name})"
 
     def get_category_name(self):
         return self.id_category.name
