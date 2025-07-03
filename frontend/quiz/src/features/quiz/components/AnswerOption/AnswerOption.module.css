@@ -13,13 +13,11 @@
 
 .answerText {
     margin-left: var(--spacing-sm);
-    color: var(--color-text);
     font-size: 1rem;
 }
 
 .answerOption--selected {
     background: var(--color-selected-bg);
-    color: var(--color-text);
     border-color: var(--color-primary);
 }
 .answerOption--selected:hover,
