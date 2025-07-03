@@ -32,9 +32,9 @@ class Question(models.Model):
 # Answer(*id,text,score,correction,id_question)
 class Answer(models.Model):
     name = models.CharField(max_length=255)
-    text = models.TextField()
+    text = HTMLField()
     score = models.DecimalField(max_digits=3, decimal_places=2)  # da -1 a 1
-    correction = models.TextField(blank=True)
+    correction = HTMLField()
     id_question = models.ForeignKey(
         Question, related_name="answers", on_delete=models.CASCADE
     )
