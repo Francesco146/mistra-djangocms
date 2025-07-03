@@ -11,7 +11,7 @@
       {% render_block 'css' %}
     </head>
     <body class="d-flex flex-column min-vh-100">
-      <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="top:0; left:50%; z-index:10000;">Passa al contenuto principale</a>
+      <a href="#main-content" id="skip-to-main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="z-index:10000;">Passa al contenuto principale</a>
       {% cms_toolbar %}
       {% block navbar %}{% endblock %}
 
@@ -34,17 +34,32 @@
 
       {% addtoblock 'js' %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock%}
       {% addtoblock 'js' %}
-<script>
-function setNavbarHeightVar() {
-  const header = document.querySelector('header');
-  if (header) {
-    const h = header.offsetHeight + 'px';
-    document.documentElement.style.setProperty('--navbar-header-height', h);
-  }
-}
-window.addEventListener('DOMContentLoaded', setNavbarHeightVar);
-window.addEventListener('resize', setNavbarHeightVar);
-</script>{% endaddtoblock %}
+        <script>
+        // Gestione skip-to-content accessibile anche con React/SPA
+        document.addEventListener('DOMContentLoaded', function() {
+          var skipLink = document.getElementById('skip-to-main-content');
+          if (skipLink) {
+            skipLink.addEventListener('click', function(event) {
+              event.preventDefault();
+              var el = document.getElementById('main-content');
+              if (el) {
+                el.setAttribute('tabindex', '-1');
+                el.focus();
+              }
+            });
+          }
+        });
+        function setNavbarHeightVar() {
+          const header = document.querySelector('header');
+          if (header) {
+            const h = header.offsetHeight + 'px';
+            document.documentElement.style.setProperty('--navbar-header-height', h);
+          }
+        }
+        window.addEventListener('DOMContentLoaded', setNavbarHeightVar);
+        window.addEventListener('resize', setNavbarHeightVar);
+        </script>
+      {% endaddtoblock %}
       {% render_block 'js' %}
     </body>
 </html>
