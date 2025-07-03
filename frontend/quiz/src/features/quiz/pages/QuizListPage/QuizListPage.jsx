@@ -24,9 +24,10 @@ function QuizListPage() {
     };
 
     return (
-        <main className={styles.quizContainer} aria-busy={loading} aria-live="polite">
-            <h1 className={styles.quizTitle}>Quiz Disponibili</h1>
+        <>
+        <h1 className={styles.quizTitle}>Quiz Disponibili</h1>
 
+        <div className={styles.quizContainer} aria-busy={loading} aria-live="polite">
             {loading ? (
                 <div role="status">
                     <div className={styles.loading} aria-hidden="true"></div>
@@ -53,7 +54,8 @@ function QuizListPage() {
                     ))}
                 </ul>
             )}
-        </main>
+        </div>
+        </>
     );
 }
 

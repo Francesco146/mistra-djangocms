@@ -1,6 +1,6 @@
 .notFoundContainer {
     text-align: center;
-    margin-top: 4rem;
+    background-color: var(--color-bg);
 }
 
 .notFoundTitle {
