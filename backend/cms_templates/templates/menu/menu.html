@@ -4,7 +4,7 @@
     <li class="nav-item text-center{% if child.children %} dropdown{% endif %}">
         {% if child.children %}
             <a class="nav-link dropdown-toggle text-white{% if child.selected or child.ancestor %} bg-primary btn{% endif %}" role="button" data-bs-toggle="dropdown" href="{{ child.get_absolute_url }}" id="menu-{{ child.id|safe }}">{{ child.get_menu_title }}</a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="menu-{{ child.ancestor.id|safe }}">
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="menu-{{ child.id|safe }}">
                 {% show_menu from_level to_level extra_inactive extra_active "menu/dropdown.html" "" "" child %}
             </ul>
         {% else %}
