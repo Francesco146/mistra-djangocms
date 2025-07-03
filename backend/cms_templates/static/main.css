@@ -1,0 +1,64 @@
+:root {
+    --bs-body-font-size: 1.1rem;
+    --bs-primary: #002E42;
+    --bs-primary-rgb: 0, 46, 66;
+    --bs-secondary: #3079B5;
+    --bs-secondary-rgb: 48, 121, 181;
+    --bs-success: #1C9B60;
+    --bs-success-rgb: 28, 155, 96;
+    --bs-dange: #DD4050;
+    --bs-danger-rgb: 221, 64, 80;
+}
+
+#root {
+    color: initial;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+.floating-navbar {
+  position: sticky;
+  z-index: 1051;
+  border-radius: 1rem;
+}
+@media (max-width: 991.98px) {
+  .floating-navbar {
+    border-radius: 0 0 1rem 1rem;
+  }
+}
+.floating-navbar .navbar-nav {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+@media (max-width: 991.98px) {
+  .floating-navbar .navbar-nav {
+    display: block;
+    width: auto;
+  }
+}
+.floating-navbar .navbar-brand img {
+  transition: width 0.3s, height 0.3s;
+}
+.floating-navbar.shrink .navbar-brand img {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+
+main#main-content {
+    position: relative;
+}
+main#main-content::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: calc(-1 * var(--navbar-header-height, 100px));
+    left: 0;
+    width: 100%;
+    height: var(--navbar-header-height, 100px);
+    background: var(--bs-primary);
+}

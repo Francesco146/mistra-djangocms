@@ -6,27 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>{% page_attribute "page_title" %} | Centro MISTRA</title>
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" >
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
       {% render_block 'css' %}
-        <style>
-            :root {
-                --bs-body-font-size: 1.1rem;
-                --bs-primary: #002E42;
-                --bs-primary-rgb: 0, 46, 66;
-                --bs-secondary: #3079B5;
-                --bs-secondary-rgb: 48, 121, 181;
-                --bs-success: #1C9B60;
-                --bs-success-rgb: 28, 155, 96;
-                --bs-dange: #DD4050;
-                --bs-danger-rgb: 221, 64, 80;
-            }
-            main {
-                color: var(--bs-primary);
-            }
-            #root {
-              color: initial
-            }
-        </style>
     </head>
     <body class="d-flex flex-column min-vh-100">
       <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="top:0; left:50%; z-index:10000;">Passa al contenuto principale</a>
@@ -50,7 +32,19 @@
         </footer>
       {% endblock content %}
 
-      {% addtoblock "js" %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock %}
+      {% addtoblock 'js' %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock%}
+      {% addtoblock 'js' %}
+<script>
+function setNavbarHeightVar() {
+  const header = document.querySelector('header');
+  if (header) {
+    const h = header.offsetHeight + 'px';
+    document.documentElement.style.setProperty('--navbar-header-height', h);
+  }
+}
+window.addEventListener('DOMContentLoaded', setNavbarHeightVar);
+window.addEventListener('resize', setNavbarHeightVar);
+</script>{% endaddtoblock %}
       {% render_block 'js' %}
     </body>
 </html>
