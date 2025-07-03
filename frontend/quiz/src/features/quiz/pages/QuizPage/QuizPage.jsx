@@ -30,6 +30,7 @@ function QuizPage() {
         backendResults,
         backendScore,
         executionId,
+        quizTitle,
     } = useQuizLogic(id);
 
     const { generatePDF } = usePDFGenerator();
@@ -58,6 +59,8 @@ function QuizPage() {
     const question = questions[currentIndex];
 
     return (
+        <>
+        <h1 className={styles.quizTitle}>{quizTitle || "Quiz"}</h1>
         <main
             className={styles.quizContainer}
             aria-busy="false"
@@ -130,6 +133,7 @@ function QuizPage() {
                 )}
             </div>
         </main>
+        </>
     );
 }
 

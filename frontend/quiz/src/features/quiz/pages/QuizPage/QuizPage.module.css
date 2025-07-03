@@ -13,6 +13,11 @@
     background: var(--color-bg);
 }
 
+.quizTitle {
+    font-size: 2.75rem;
+    text-align: center;
+}
+
 .quizGrid {
     width: 100%;
     max-width: 960px;
