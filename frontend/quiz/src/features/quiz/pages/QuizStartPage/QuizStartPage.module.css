@@ -1,13 +1,18 @@
 /* QuizStartPage.module.css */
 
 .quizStartContainer {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background: var(--color-bg);
-    min-height: 100vh;
-    padding: var(--spacing-md);
+    justify-content: flex-start;
+}
+
+.quizTitle {
+    color: white;
+    font-size: 2.75rem;
+    /* margin-bottom: var(--spacing-md); */
+    text-align: center;
 }
 
 .quizStartCard {
@@ -23,6 +28,13 @@
 .quizStartForm {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--color-bg);
+    padding: var(--spacing-md);
+    flex: 1 1 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .formGroup {

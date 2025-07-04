@@ -1,21 +1,46 @@
 {% extends "base.html" %}
-{% load cms_tags menu_tags static %}
+{% load cms_tags menu_tags static sekizai_tags %}
 
 {% block navbar %}
-<header class="sticky-top">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-4">
-    <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center" href="/">
-        <img src="{% static 'logo-centro-mistra.png' %}" alt="Logo" width="48" height="48" class="me-2">
-      </a>
+
+{% addtoblock 'js' %}
+<script>
+  // Logo resize on scroll
+  window.addEventListener('scroll', function() {
+    const nav = document.querySelector('.navbar');
+    if (!nav) return;
+    if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
+      nav.classList.add('shrink');
+    } else {
+      nav.classList.remove('shrink');
+  }
+});
+</script>
+{% endaddtoblock %}
+
+{% addtoblock 'css' %}
+<style>
+  .navbar .navbar-brand img {
+    transition: width 0.3s, height 0.3s;
+  }
+  .navbar.shrink .navbar-brand img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+</style>
+{% endaddtoblock %}
+
+<header class="sticky-top p-2">
+  <nav class="container navbar navbar-expand-lg navbar-dark rounded-4 bg-secondary shadow p-2">
+      <span class="navbar-brand">
+        <img src="{% static 'logo-centro-mistra.png' %}" alt="" width="60" height="60">
+      </span>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Apri menù di navigazione">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">{% block menubar %}{% show_menu 0 100 100 100 'menu/menu.html' %}{% endblock %}</ul>
+        <ul class="navbar-nav w-100 align-items-center d-block d-lg-flex">{% block menubar %}{% show_menu 0 100 100 100 'menu/menu.html' %}{% endblock %}</ul>
       </div>
-    </div>
   </nav>
 </header>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% load djangocms_alias_tags %}
+
+{% block footer %}
+<footer class="bg-secondary">
+    <div class="m-4">
+        {% static_alias 'footer' %}
+    </div>
+</footer>
+{% endblock %}

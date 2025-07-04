@@ -1,0 +1,24 @@
+:root {
+    --bs-body-font-size: 1.1rem;
+    --bs-primary: #002E42;
+    --bs-primary-rgb: 0, 46, 66;
+    --bs-secondary: #3079B5;
+    --bs-secondary-rgb: 48, 121, 181;
+    --bs-success: #1C9B60;
+    --bs-success-rgb: 28, 155, 96;
+    --bs-dange: #DD4050;
+    --bs-danger-rgb: 221, 64, 80;
+}
+
+#root {
+    color: initial;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+.content-wrapper:empty {
+  display: none;
+}

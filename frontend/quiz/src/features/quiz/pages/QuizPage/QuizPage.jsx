@@ -30,6 +30,7 @@ function QuizPage() {
         backendResults,
         backendScore,
         executionId,
+        quizTitle,
     } = useQuizLogic(id);
 
     const { generatePDF } = usePDFGenerator();
@@ -58,6 +59,8 @@ function QuizPage() {
     const question = questions[currentIndex];
 
     return (
+        <>
+        <h1 className={styles.quizTitle}>{quizTitle || "Quiz"}</h1>
         <main
             className={styles.quizContainer}
             aria-busy="false"
@@ -101,14 +104,6 @@ function QuizPage() {
                 </div>
             </div>
 
-            {/* Mobile navigation */}
-            <MobileNavigation
-                currentIndex={currentIndex}
-                questionsLength={questions.length}
-                onPrevious={prevQuestion}
-                onNext={nextQuestion}
-            />
-
             {/* Submit / Retry controls */}
             <div className={styles.quizFooter}>
                 {!submitted && currentIndex === questions.length - 1 && (
@@ -130,6 +125,14 @@ function QuizPage() {
                 )}
             </div>
         </main>
+        {/* Mobile navigation */}
+        <MobileNavigation
+            currentIndex={currentIndex}
+            questionsLength={questions.length}
+            onPrevious={prevQuestion}
+            onNext={nextQuestion}
+        />
+        </>
     );
 }
 

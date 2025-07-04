@@ -13,6 +13,7 @@ const LOCAL_STORAGE_KEY = (id) => `quizState_${id}`;
 
 export const useQuizLogic = (id) => {
     const [questions, setQuestions] = useState([]);
+    const [quizTitle, setQuizTitle] = useState("");
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -93,6 +94,7 @@ export const useQuizLogic = (id) => {
         fetch(`http://localhost:8000/api/tests/${id}/`)
             .then((res) => res.json())
             .then((data) => {
+                setQuizTitle(data.name || "");
                 const shuffledQuestions = shuffle(
                     data.questions.map((q) => ({
                         ...q,
@@ -242,6 +244,7 @@ export const useQuizLogic = (id) => {
 
     return {
         questions,
+        quizTitle,
         loading,
         currentIndex,
         selectedAnswers,

@@ -11,14 +11,14 @@
 /* ─── Root Custom Properties ─────────────────────────────────────────────── */
 :root {
     /* Colors */
-    --color-bg: #f3f4f6;
+    --color-bg: #f8f9fa;
     --color-card: #ffffff;
     --color-text: #111827;
-    --color-text-secondary: #6b7280;
-    --color-primary: #494ce9;
-    --color-primary-hover: #332bc5;
+    --color-text-secondary: #686F7D;
+    --color-primary: #3079B5;
+    --color-primary-hover: #20527b;
     --color-selected-bg: #e4e6ff;
-    --color-answer-correct: #22c55e;
+    --color-answer-correct: #218739;
     --color-answer-incorrect: #ef4444;
 
     /* Spacing & Radius */
@@ -56,7 +56,7 @@ h4,
 h5,
 h6 {
     color: var(--color-text);
-    margin: var(--spacing-md) 0 var(--spacing-sm);
+    padding: var(--spacing-md) 0 var(--spacing-sm);
     line-height: 1.2;
 }
 

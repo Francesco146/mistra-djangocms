@@ -42,10 +42,11 @@ function QuizStartPage() {
     if (error) {
         return <div className={styles.quizStartError}>{error}</div>;
     }
-
+    
     return (
+        <>
         <main className={styles.quizStartContainer}>
-            <h1>Prima di iniziare…</h1>
+            <h1 className={styles.quizTitle}>Prima di iniziare…</h1>
             <form className={styles.quizStartForm} onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
                     <label htmlFor="age">Età</label>
@@ -70,7 +71,7 @@ function QuizStartPage() {
                                 checked={sex === String(choice.id)}
                                 onChange={() => setSex(String(choice.id))}
                                 required
-                            />
+                                />
                             {choice.name}
                         </label>
                     ))}
@@ -79,11 +80,12 @@ function QuizStartPage() {
                     type="submit"
                     className={styles.quizStartButton}
                     disabled={!age || !sex}
-                >
+                    >
                     Inizia quiz
                 </button>
             </form>
         </main>
+        </>
     );
 }
 

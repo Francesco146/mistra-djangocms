@@ -6,47 +6,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>{% page_attribute "page_title" %} | Centro MISTRA</title>
         <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" >
-      {% addtoblock "css" %}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">{% endaddtoblock %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
       {% render_block 'css' %}
-        <style>
-            :root {
-                --bs-body-font-size: 1.1rem;
-                --bs-primary: #003449;
-                --bs-primary-rgb: 0, 52, 73;
-                --bs-secondary: #2B6CA3;
-                --bs-secondary-rgb: 43, 108, 163;
-            }
-            main {
-                color: var(--bs-primary);
-            }
-            #root {
-              color: initial
-            }
-        </style>
     </head>
-    <body class="d-flex flex-column min-vh-100">
-      <a href="#main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="top:0; left:50%; z-index:10000;">Passa al contenuto principale</a>
+    <body class="d-flex flex-column min-vh-100 bg-primary">
+      <a href="#main-content" id="skip-to-main-content" class="visually-hidden-focusable btn btn-primary position-absolute start-50 translate-middle-x mt-2" style="z-index:10000;">Passa al contenuto principale</a>
       {% cms_toolbar %}
       {% block navbar %}{% endblock %}
 
       {% block content %}
-        <main id="main-content" class="flex-grow-1">
-          <div class="bg-primary">
-            {% placeholder "Full width" %}
-          </div>
-          <div class="container px-md-5">
-            {% placeholder "Content" %}
-          </div>
+        <main id="main-content" class="flex-grow-1 d-flex flex-column">
+          {% placeholder "Full width" %}
+          <div class="bg-light flex-grow-1 content-wrapper">{% placeholder "Content" %}</div>
         </main>
 
-        <footer class="bg-secondary text-white px-4 py-4 mt-0">
-            <div class="container text-center">
-              {% static_alias 'footer' %}
-            </div>
-        </footer>
+        {% block footer %}
+          <footer class="bg-secondary d-none d-md-block">
+              <div class="m-4">
+                {% static_alias 'footer' %}
+              </div>
+          </footer>
+        {% endblock %}
       {% endblock content %}
 
-      {% addtoblock "js" %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock %}
+      {% addtoblock 'js' %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock%}
+      {% addtoblock 'js' %}
+        <script>
+        // Gestione skip-to-content accessibile anche con React/SPA
+        document.addEventListener('DOMContentLoaded', function() {
+          var skipLink = document.getElementById('skip-to-main-content');
+          if (skipLink) {
+            skipLink.addEventListener('click', function(event) {
+              event.preventDefault();
+              var el = document.getElementById('main-content');
+              if (el) {
+                el.setAttribute('tabindex', '-1');
+                el.focus();
+              }
+            });
+          }
+        });
+        </script>
+      {% endaddtoblock %}
       {% render_block 'js' %}
     </body>
 </html>
