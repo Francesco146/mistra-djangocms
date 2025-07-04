@@ -104,14 +104,6 @@ function QuizPage() {
                 </div>
             </div>
 
-            {/* Mobile navigation */}
-            <MobileNavigation
-                currentIndex={currentIndex}
-                questionsLength={questions.length}
-                onPrevious={prevQuestion}
-                onNext={nextQuestion}
-            />
-
             {/* Submit / Retry controls */}
             <div className={styles.quizFooter}>
                 {!submitted && currentIndex === questions.length - 1 && (
@@ -133,6 +125,13 @@ function QuizPage() {
                 )}
             </div>
         </main>
+        {/* Mobile navigation */}
+        <MobileNavigation
+            currentIndex={currentIndex}
+            questionsLength={questions.length}
+            onPrevious={prevQuestion}
+            onNext={nextQuestion}
+        />
         </>
     );
 }

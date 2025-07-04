@@ -1,6 +1,7 @@
 /* QuizListPage.module.css */
 
 .quizContainer {
+    flex-grow: 1;
     padding: var(--spacing-md);
     background-color: var(--color-bg);
 }

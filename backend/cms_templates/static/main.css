@@ -18,3 +18,7 @@ a:hover,
 a:focus {
     text-decoration: underline;
 }
+
+.content-wrapper:empty {
+  display: none;
+}

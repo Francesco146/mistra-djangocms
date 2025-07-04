@@ -18,19 +18,15 @@
       {% block content %}
         <main id="main-content" class="flex-grow-1 d-flex flex-column">
           {% placeholder "Full width" %}
-          <div class="bg-light py-1 flex-grow-1">
-            <div class="container flex-grow-1">
-              {% placeholder "Content" %}
-            </div>
-          </div>
+          <div class="bg-light flex-grow-1 content-wrapper">{% placeholder "Content" %}</div>
         </main>
 
         {% block footer %}
           <footer class="bg-secondary d-none d-md-block">
               <div class="m-4">
-              {% static_alias 'footer' %}
-            </div>
-        </footer>
+                {% static_alias 'footer' %}
+              </div>
+          </footer>
         {% endblock %}
       {% endblock content %}
 

@@ -10,7 +10,7 @@ function NotFoundPage() {
                 La pagina che cerchi non esiste.
             </p>
             <button className={styles.homeButton} onClick={() => navigate("/")}>
-                Torna alla Home
+                Torna ai quiz disponibili
             </button>
         </main>
     );
