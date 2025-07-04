@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Answer, Question, Sex, Test, TestExecution
+from .models import Answer, Question, Sex, Test
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -23,13 +23,6 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = ["id", "name", "description", "min_score", "questions"]
-
-
-class TestExecutionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TestExecution
-        fields = "__all__"
-
 
 class SexSerializer(serializers.ModelSerializer):
     class Meta:

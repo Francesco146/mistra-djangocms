@@ -1,5 +1,4 @@
 import sys
-from datetime import datetime
 
 from django.db.models import Max
 from ipware import get_client_ip
@@ -18,7 +17,6 @@ from .models import (
 from .serializers import (
     QuestionSerializer,
     SexSerializer,
-    TestExecutionSerializer,
     TestSerializer,
 )
 
@@ -31,12 +29,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
-
-
-class TestExecutionViewSet(viewsets.ModelViewSet):
-    queryset = TestExecution.objects.all()
-    serializer_class = TestExecutionSerializer
-
 
 class SexViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Sex.objects.all()
