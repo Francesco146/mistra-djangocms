@@ -25,11 +25,13 @@
           </div>
         </main>
 
-        <footer class="bg-secondary text-white px-4 py-4 mt-0">
-            <div class="container text-center">
+        {% block footer %}
+          <footer class="bg-secondary d-none d-md-block">
+              <div class="m-4">
               {% static_alias 'footer' %}
             </div>
         </footer>
+        {% endblock %}
       {% endblock content %}
 
       {% addtoblock 'js' %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>{% endaddtoblock%}

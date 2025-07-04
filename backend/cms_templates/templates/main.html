@@ -9,7 +9,7 @@
   window.addEventListener('scroll', function() {
     const nav = document.querySelector('.navbar');
     if (!nav) return;
-    if (window.scrollY > 24) {
+    if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
       nav.classList.add('shrink');
     } else {
       nav.classList.remove('shrink');

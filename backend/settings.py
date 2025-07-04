@@ -136,7 +136,8 @@ THUMBNAIL_PROCESSORS = (
 
 CMS_TEMPLATES = [
     # Default template that extend base.html, to be used with Bootstrap 5
-    ("main.html", "Main template"),
+    ("main_with_footer.html", "Main template"),
+    ("main.html", "Without footer"),
 ]
 
 WSGI_APPLICATION = "wsgi.application"
