@@ -50,8 +50,6 @@ def submit_quiz(request):
         quiz_id = data["quiz_id"]
         sex_id = data.get("sex_id")  # opzionale
         age = data["age"]
-        # TODO: perche start_time non viene usata?
-        start_time = datetime.fromisoformat(data["start_time"].replace("Z", "+00:00"))
         duration = data["duration_minutes"]
         answers = data["answers"]  # es: { "1": 14, "3": 15 }
 
