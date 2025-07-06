@@ -33,8 +33,12 @@ const AnswerOption = ({
                 checked={isSelected}
                 onChange={() => onSelect(answer.id)}
                 disabled={submitted}
+                aria-labelledby={`question-title-${question.id} q${question.id}-a${answer.id}-label`}
+                aria-checked={isSelected}
+                aria-required="true"
             />
             <span
+                id={`q${question.id}-a${answer.id}-label`}
                 className={styles.answerText}
                 dangerouslySetInnerHTML={{
                     __html: DomPurify.sanitize(answer.text),

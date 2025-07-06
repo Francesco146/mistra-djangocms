@@ -84,9 +84,10 @@ const QuestionCard = ({
                 id={`answers-${question.id}`}
                 className={styles.answerSection}
                 aria-describedby={`question-text-${question.id}`}
+                aria-required="true"
             >
                 <legend className="sr-only">
-                    Opzioni per "{question.name}"
+                    Opzioni di risposta per la domanda "{question.name}"
                 </legend>
                 {answersToShow.map((ans) => (
                     <AnswerOption
@@ -97,6 +98,9 @@ const QuestionCard = ({
                         submitted={submitted}
                         onSelect={onAnswerSelect}
                         backendResults={backendResults}
+                        aria-label={`Risposta: ${
+                            ans.text || ans.label || ans.value
+                        }`}
                     />
                 ))}
             </fieldset>
@@ -121,7 +125,9 @@ const QuestionCard = ({
                     <strong>{isCorrect ? "Corretto!" : "Sbagliato!"}</strong>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: DomPurify.sanitize(currentAnswerObj.correction),
+                            __html: DomPurify.sanitize(
+                                currentAnswerObj.correction
+                            ),
                         }}
                     />
                 </div>
