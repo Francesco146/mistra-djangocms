@@ -58,7 +58,7 @@ This project follows a decoupled client-server architecture.
 *   **API:** [Django REST Framework](https://www.django-rest-framework.org/)
 *   **CMS:** [django-cms](https://www.django-cms.org/)
 *   **CORS:** [django-cors-headers](https://github.com/adamchainz/django-cors-headers)
-*   **Database:** PostgreSQL (default, configurable)
+*   **Database:** SQLite (default, configurable)
 
 ### Architecture Diagram
 
@@ -67,7 +67,7 @@ graph TD;
     User --> Browser;
     Browser -- HTTP/S --> Frontend(React on Vite);
     Frontend -- API Calls --> Backend(Django REST);
-    Backend -- Queries --> Database(PostgreSQL);
+    Backend -- Queries --> Database(SQLite);
     Backend -- Manages --> CMS(django-cms);
     Database --> Backend;
     CMS --> Backend;
@@ -120,7 +120,7 @@ To manage the services, use the following commands:
 
 1.  **User Interaction:** A user accesses the website and interacts with the React frontend.
 2.  **API Request:** The frontend makes API calls to the Django backend to fetch or submit data (e.g., quiz questions, answers).
-3.  **Backend Processing:** Django receives the request, processes it, and interacts with the PostgreSQL database.
+3.  **Backend Processing:** Django receives the request, processes it, and interacts with the SQLite database.
 4.  **API Response:** The backend sends a JSON response back to the frontend.
 5.  **UI Update:** The frontend updates the UI dynamically based on the API response.
 
