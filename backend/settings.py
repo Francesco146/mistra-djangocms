@@ -80,7 +80,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_vite",
     "djangocms_video",
-    "djangocms_rawhtml"
+    "djangocms_rawhtml",
 ]
 
 MIDDLEWARE = [

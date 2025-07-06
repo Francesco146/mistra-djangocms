@@ -1,12 +1,9 @@
 {% extends "base.html" %}
 {% load cms_tags menu_tags static sekizai_tags %}
-
 {% block navbar %}
-
-{% addtoblock 'js' %}
-<script>
-  // Logo resize on scroll
-  window.addEventListener('scroll', function() {
+    {% addtoblock 'js' %}
+    <script>
+window.addEventListener('scroll', function() {
     const nav = document.querySelector('.navbar');
     if (!nav) return;
     if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
@@ -15,9 +12,8 @@
       nav.classList.remove('shrink');
   }
 });
-</script>
+    </script>
 {% endaddtoblock %}
-
 {% addtoblock 'css' %}
 <style>
   .navbar .navbar-brand img {
@@ -29,20 +25,32 @@
   }
 </style>
 {% endaddtoblock %}
-
 <header class="sticky-top p-2">
-  <nav class="container navbar navbar-expand-lg navbar-dark rounded-4 bg-secondary shadow p-2">
-      <span class="navbar-brand">
-        <a href="/">
-          <img src="{% static 'logo-centro-mistra.png' %}" alt="Logo Centro MISTRA" width="60" height="60">
-        </a>
-      </span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Apri menù di navigazione">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav w-100 align-items-center d-block d-lg-flex">{% block menubar %}{% show_menu 0 100 100 100 'menu/menu.html' %}{% endblock %}</ul>
-      </div>
-  </nav>
+    <nav class="container navbar navbar-expand-lg navbar-dark rounded-4 bg-secondary shadow p-2">
+        <span class="navbar-brand">
+            <a href="/#" aria-label="Homepage Centro MISTRA">
+                <img src="{% static 'logo-centro-mistra.png' %}"
+                     alt="Logo Centro MISTRA"
+                     width="60"
+                     height="60">
+            </a>
+        </span>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Apri menù di navigazione">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav w-100 align-items-center d-block d-lg-flex">
+                {% block menubar %}
+                    {% show_menu 0 100 100 100 'menu/menu.html' %}
+                {% endblock %}
+            </ul>
+        </div>
+    </nav>
 </header>
 {% endblock %}
