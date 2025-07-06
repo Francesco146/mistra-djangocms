@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.png" />
@@ -8,11 +8,28 @@
             rel="stylesheet"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Quiz MISTRA: quiz interattivo accessibile per tutti."
+        />
         <title>Quiz MISTRA</title>
         <link rel="stylesheet" href="/src/styles/global.css" />
     </head>
     <body>
-        <div id="root" style="background-color: #002E42; min-height: 100vh; display: flex; flex-direction: column;"></div>
+        <a href="#main-content" class="sr-only"
+            >Salta al contenuto principale</a
+        >
+        <main id="main-content" tabindex="-1" role="main">
+            <div
+                id="root"
+                style="
+                    background-color: #002e42;
+                    min-height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                "
+            ></div>
+        </main>
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>
