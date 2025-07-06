@@ -8,6 +8,8 @@
     --bs-success-rgb: 28, 155, 96;
     --bs-dange: #DD4050;
     --bs-danger-rgb: 221, 64, 80;
+    --bs-light-rgb: 251, 252, 252;
+    --bs-link-color-rgb: 3, 103, 252;
 }
 
 #root {
