@@ -30,6 +30,7 @@ class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
 
+
 class SexViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Sex.objects.all()
     serializer_class = SexSerializer
