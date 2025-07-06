@@ -138,7 +138,7 @@ class GivenAnswer(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.test_execution.id} - Q{self.question.id} → A{self.answer.id if self.answer else 'Non ha risposto'}"
+        return f"{self.test_execution.id} - Q{self.question.id} → {'A' + str(self.answer.id) if self.answer else 'Non ha risposto'}"
 
     def get_test_name(self):
         return self.test_execution.test.name
