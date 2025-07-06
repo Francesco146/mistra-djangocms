@@ -1,42 +1,32 @@
 services:
-  web:
-    # Backend Django: builda l'immagine dalla cartella backend
-    build: ./backend
-    # Mappa la porta 80 del container alla porta 8000 dell'host
-    ports:
-      - "8000:80"
-    # Sincronizza la cartella backend con /app nel container (lettura/scrittura)
-    volumes:
-      - "./backend:/app:rw"
-      - "./data:/data:rw"
-    # Comando per avviare il server Django all'indirizzo 0.0.0.0:80
-    command: python manage.py runserver 0.0.0.0:80
-    networks:
-      - djangocmsnet
-    # File con variabili d'ambiente per Django
-    env_file: .env-local
+    web:
+        build: ./backend
+        ports:
+            - "8000:80"
+        volumes:
+            - "./backend:/app:rw"
+            - "./data:/data:rw"
+        command: python manage.py runserver 0.0.0.0:80
+        networks:
+            - djangocmsnet
+        env_file: .env-local
 
-  frontend:
-    # Frontend React (Vite): builda l'immagine dalla cartella frontend/quiz
-    build: ./frontend/quiz
-    # Mappa la porta 5173 del container (Vite default) alla 5173 dell'host
-    ports:
-      - "5173:5173"
-    # Sincronizza il codice sorgente del frontend
-    volumes:
-      - "./frontend/quiz:/app"
-      # Evita conflitti con node_modules: non sincronizziamo questa cartella
-      - quiz_app_node_modules:/app/node_modules
-    command: >
-      sh -c "npm install --no-audit --no-fund &&
-             npm run dev"
+    frontend:
+        build: ./frontend/quiz
+        ports:
+            - "5173:5173"
+        volumes:
+            - "./frontend/quiz:/app"
+            - quiz_app_node_modules:/app/node_modules
+        command: >
+            sh -c "npm install --no-audit --no-fund &&
+                   npm run dev"
 
-    networks:
-      - djangocmsnet
+        networks:
+            - djangocmsnet
 
 networks:
-  # Network condivisa tra i container
-  djangocmsnet:
+    djangocmsnet:
 
 volumes:
-  quiz_app_node_modules:
+    quiz_app_node_modules:

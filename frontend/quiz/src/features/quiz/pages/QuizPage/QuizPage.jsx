@@ -60,80 +60,80 @@ function QuizPage() {
 
     return (
         <>
-        <h1 className={styles.quizTitle}>{quizTitle || "Quiz"}</h1>
-        <main
-            className={styles.quizContainer}
-            aria-busy="false"
-            aria-live="polite"
-        >
-            <div className={styles.quizGrid}>
-                {/* Previous navigation (desktop/tablet) */}
-                <div className={`${styles.navColumn} ${styles.navPrev}`}>
-                    <NavigationButton
-                        direction="prev"
-                        onClick={prevQuestion}
-                        disabled={currentIndex === 0}
-                    >
-                        ←
-                    </NavigationButton>
-                </div>
+            <h1 className={styles.quizTitle}>{quizTitle || "Quiz"}</h1>
+            <main
+                className={styles.quizContainer}
+                aria-busy="false"
+                aria-live="polite"
+            >
+                <div className={styles.quizGrid}>
+                    {/* Previous navigation (desktop/tablet) */}
+                    <div className={`${styles.navColumn} ${styles.navPrev}`}>
+                        <NavigationButton
+                            direction="prev"
+                            onClick={prevQuestion}
+                            disabled={currentIndex === 0}
+                        >
+                            ←
+                        </NavigationButton>
+                    </div>
 
-                {/* Question + Answers */}
-                <div className={styles.questionColumn}>
-                    <QuestionCard
-                        question={question}
-                        questions={questions}
-                        currentIndex={currentIndex}
-                        selectedAnswers={selectedAnswers}
-                        submitted={submitted}
-                        onAnswerSelect={handleAnswerSelect}
-                        onQuestionSelect={setCurrentIndex}
-                        backendResults={backendResults}
-                    />
-                </div>
-
-                {/* Next navigation (desktop/tablet) */}
-                <div className={`${styles.navColumn} ${styles.navNext}`}>
-                    <NavigationButton
-                        direction="next"
-                        onClick={nextQuestion}
-                        disabled={currentIndex === questions.length - 1}
-                    >
-                        →
-                    </NavigationButton>
-                </div>
-            </div>
-
-            {/* Submit / Retry controls */}
-            <div className={styles.quizFooter}>
-                {!submitted && currentIndex === questions.length - 1 && (
-                    <button
-                        className={styles.submitButton}
-                        onClick={handleSubmit}
-                    >
-                        Invia risposte
-                    </button>
-                )}
-                <div role="status">
-                    {submitted && (
-                        <QuizSummary
-                        correctCount={correctCount}
-                        totalQuestions={questions.length}
-                        onRetry={handleRetryAndGoToStart}
-                        onSavePDF={handleSavePDF}
-                        backendScore={backendScore}
+                    {/* Question + Answers */}
+                    <div className={styles.questionColumn}>
+                        <QuestionCard
+                            question={question}
+                            questions={questions}
+                            currentIndex={currentIndex}
+                            selectedAnswers={selectedAnswers}
+                            submitted={submitted}
+                            onAnswerSelect={handleAnswerSelect}
+                            onQuestionSelect={setCurrentIndex}
+                            backendResults={backendResults}
                         />
-                    )}
+                    </div>
+
+                    {/* Next navigation (desktop/tablet) */}
+                    <div className={`${styles.navColumn} ${styles.navNext}`}>
+                        <NavigationButton
+                            direction="next"
+                            onClick={nextQuestion}
+                            disabled={currentIndex === questions.length - 1}
+                        >
+                            →
+                        </NavigationButton>
+                    </div>
                 </div>
-            </div>
-        </main>
-        {/* Mobile navigation */}
-        <MobileNavigation
-            currentIndex={currentIndex}
-            questionsLength={questions.length}
-            onPrevious={prevQuestion}
-            onNext={nextQuestion}
-        />
+
+                {/* Submit / Retry controls */}
+                <div className={styles.quizFooter}>
+                    {!submitted && currentIndex === questions.length - 1 && (
+                        <button
+                            className={styles.submitButton}
+                            onClick={handleSubmit}
+                        >
+                            Invia risposte
+                        </button>
+                    )}
+                    <div role="status">
+                        {submitted && (
+                            <QuizSummary
+                                correctCount={correctCount}
+                                totalQuestions={questions.length}
+                                onRetry={handleRetryAndGoToStart}
+                                onSavePDF={handleSavePDF}
+                                backendScore={backendScore}
+                            />
+                        )}
+                    </div>
+                </div>
+            </main>
+            {/* Mobile navigation */}
+            <MobileNavigation
+                currentIndex={currentIndex}
+                questionsLength={questions.length}
+                onPrevious={prevQuestion}
+                onNext={nextQuestion}
+            />
         </>
     );
 }

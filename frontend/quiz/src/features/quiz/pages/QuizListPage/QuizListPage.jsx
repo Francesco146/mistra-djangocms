@@ -25,36 +25,43 @@ function QuizListPage() {
 
     return (
         <>
-        <h1 className={styles.quizTitle}>Quiz Disponibili</h1>
+            <h1 className={styles.quizTitle}>Quiz Disponibili</h1>
 
-        <div className={styles.quizContainer} aria-busy={loading} aria-live="polite">
-            {loading ? (
-                <div role="status">
-                    <div className={styles.loading} aria-hidden="true"></div>
-                    <span className="sr-only">
-                        Caricamento dei quiz in corso…
-                    </span>
-                </div>
-            ) : (
-                <ul className={styles.quizList}>
-                    {tests.map((test) => (
-                        <li className={styles.quizCard} key={test.id}>
-                            <h2 className={styles.quizName}>{test.name}</h2>
-                            <p className={styles.quizDescription}>
-                                {test.description}
-                            </p>
-                            <button
-                                className={styles.quizButton}
-                                aria-label={`Inizia il quiz ${test.name}`}
-                                onClick={() => handleStartQuiz(test.id)}
-                            >
-                                Inizia
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+            <div
+                className={styles.quizContainer}
+                aria-busy={loading}
+                aria-live="polite"
+            >
+                {loading ? (
+                    <div role="status">
+                        <div
+                            className={styles.loading}
+                            aria-hidden="true"
+                        ></div>
+                        <span className="sr-only">
+                            Caricamento dei quiz in corso…
+                        </span>
+                    </div>
+                ) : (
+                    <ul className={styles.quizList}>
+                        {tests.map((test) => (
+                            <li className={styles.quizCard} key={test.id}>
+                                <h2 className={styles.quizName}>{test.name}</h2>
+                                <p className={styles.quizDescription}>
+                                    {test.description}
+                                </p>
+                                <button
+                                    className={styles.quizButton}
+                                    aria-label={`Inizia il quiz ${test.name}`}
+                                    onClick={() => handleStartQuiz(test.id)}
+                                >
+                                    Inizia
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </>
     );
 }
