@@ -114,15 +114,17 @@ function QuizPage() {
                         Invia risposte
                     </button>
                 )}
-                {submitted && (
-                    <QuizSummary
+                <div role="status">
+                    {submitted && (
+                        <QuizSummary
                         correctCount={correctCount}
                         totalQuestions={questions.length}
                         onRetry={handleRetryAndGoToStart}
                         onSavePDF={handleSavePDF}
                         backendScore={backendScore}
-                    />
-                )}
+                        />
+                    )}
+                </div>
             </div>
         </main>
         {/* Mobile navigation */}
