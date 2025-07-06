@@ -14,8 +14,8 @@
     --color-bg: #f8f9fa;
     --color-card: #ffffff;
     --color-text: #111827;
-    --color-text-secondary: #686F7D;
-    --color-primary: #3079B5;
+    --color-text-secondary: #686f7d;
+    --color-primary: #3079b5;
     --color-primary-hover: #20527b;
     --color-selected-bg: #e4e6ff;
     --color-answer-correct: #218739;
@@ -33,6 +33,13 @@
     /* Typography */
     --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
+}
+
+.quiz-root {
+    background-color: #002e42;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ─── Base Typography & Layout ───────────────────────────────────────────── */

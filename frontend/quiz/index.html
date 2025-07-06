@@ -12,6 +12,10 @@
             name="description"
             content="Quiz MISTRA: quiz interattivo accessibile per tutti."
         />
+        <meta
+            name="keywords"
+            content="quiz, MISTRA, interattivo, accessibile, domande, risposte, apprendimento"
+        />
         <title>Quiz MISTRA</title>
         <link rel="stylesheet" href="/src/styles/global.css" />
     </head>
@@ -20,15 +24,7 @@
             >Salta al contenuto principale</a
         >
         <main id="main-content" tabindex="-1" role="main">
-            <div
-                id="root"
-                style="
-                    background-color: #002e42;
-                    min-height: 100vh;
-                    display: flex;
-                    flex-direction: column;
-                "
-            ></div>
+            <div id="root" class="quiz-root"></div>
         </main>
         <script type="module" src="/src/main.jsx"></script>
     </body>
