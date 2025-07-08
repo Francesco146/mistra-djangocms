@@ -176,24 +176,3 @@ class SexAdmin(admin.ModelAdmin):
     list_display_links = ("id", "name")
     search_fields = ("name",)
     ordering = ("name",)
-
-
-@admin.register(Answer)
-class AnswerAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "get_question_name", "formatted_score")
-    list_display_links = ("id", "name")
-    search_fields = ("name", "text", "id_question__name")
-    list_filter = ("score", "id_question__id_category")
-    ordering = ("id_question", "score")
-
-    def get_question_name(self, obj):
-        return obj.id_question.name
-
-    get_question_name.short_description = "Question"
-    get_question_name.admin_order_field = "id_question__name"
-
-    def formatted_score(self, obj):
-        return f"{obj.score:+.2f}"
-
-    formatted_score.short_description = "Score"
-    formatted_score.admin_order_field = "score"
