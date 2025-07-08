@@ -63,8 +63,6 @@ function QuizPage() {
             <h1 className={styles.quizTitle}>{quizTitle || "Quiz"}</h1>
             <main
                 className={styles.quizContainer}
-                aria-busy="false"
-                aria-live="polite"
             >
                 <div className={styles.quizGrid}>
                     {/* Previous navigation (desktop/tablet) */}

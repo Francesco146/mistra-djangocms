@@ -41,11 +41,16 @@ const QuestionCard = ({
         }
     }, [question.text]);
 
+    // Sposta il focus sul testo della domanda quando cambia la domanda
+    useEffect(() => {
+        if (textRef.current) {
+            textRef.current.focus();
+        }
+    }, [question.id]);
+
     return (
         <div
             className={styles.questionCard}
-            role="group"
-            aria-labelledby={`question-title-${question.id}`}
         >
             <h2
                 id={`question-title-${question.id}`}
@@ -62,6 +67,7 @@ const QuestionCard = ({
                         (expanded ? styles.expanded : "")
                     }
                     ref={textRef}
+                    tabIndex="-1"
                     role="region"
                     aria-labelledby={`question-title-${question.id}`}
                     dangerouslySetInnerHTML={{
@@ -83,7 +89,6 @@ const QuestionCard = ({
             <fieldset
                 id={`answers-${question.id}`}
                 className={styles.answerSection}
-                aria-describedby={`question-text-${question.id}`}
                 aria-required="true"
             >
                 <legend className="sr-only">

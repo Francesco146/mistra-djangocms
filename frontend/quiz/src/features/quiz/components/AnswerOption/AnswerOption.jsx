@@ -33,7 +33,7 @@ const AnswerOption = ({
                 checked={isSelected}
                 onChange={() => onSelect(answer.id)}
                 disabled={submitted}
-                aria-labelledby={`question-title-${question.id} q${question.id}-a${answer.id}-label`}
+                aria-labelledby={`q${question.id}-a${answer.id}-label`}
                 aria-checked={isSelected}
                 aria-required="true"
             />
