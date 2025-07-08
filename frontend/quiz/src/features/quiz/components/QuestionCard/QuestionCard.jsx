@@ -49,9 +49,7 @@ const QuestionCard = ({
     }, [question.id]);
 
     return (
-        <div
-            className={styles.questionCard}
-        >
+        <div className={styles.questionCard}>
             <h2
                 id={`question-title-${question.id}`}
                 className={styles.questionTitle}
@@ -110,15 +108,6 @@ const QuestionCard = ({
                 ))}
             </fieldset>
 
-            <QuestionNavigation
-                questions={questions}
-                selectedAnswers={selectedAnswers}
-                currentIndex={currentIndex}
-                submitted={submitted}
-                onQuestionSelect={onQuestionSelect}
-                backendResults={backendResults}
-            />
-
             {submitted && (
                 <div
                     className={`${styles.correctionText} ${
@@ -137,6 +126,15 @@ const QuestionCard = ({
                     />
                 </div>
             )}
+
+            <QuestionNavigation
+                questions={questions}
+                selectedAnswers={selectedAnswers}
+                currentIndex={currentIndex}
+                submitted={submitted}
+                onQuestionSelect={onQuestionSelect}
+                backendResults={backendResults}
+            />
 
             <div className={styles.progressContainer} aria-hidden="true">
                 <div

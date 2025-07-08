@@ -1,5 +1,5 @@
-import styles from "./AnswerOption.module.css";
 import DomPurify from "dompurify";
+import styles from "./AnswerOption.module.css";
 
 const AnswerOption = ({
     answer,
@@ -20,6 +20,15 @@ const AnswerOption = ({
         extraClass = styles["answerOption--selected"];
     }
 
+    let ariaLabel = answer.text;
+    if (submitted) {
+        if (backendResults[question.id] === true && isSelected) {
+            ariaLabel += " (risposta corretta)";
+        } else if (isSelected) {
+            ariaLabel += " (risposta sbagliata)";
+        }
+    }
+
     return (
         <label
             htmlFor={`q${question.id}-a${answer.id}`}
@@ -34,6 +43,7 @@ const AnswerOption = ({
                 onChange={() => onSelect(answer.id)}
                 disabled={submitted}
                 aria-labelledby={`q${question.id}-a${answer.id}-label`}
+                aria-label={ariaLabel}
                 aria-checked={isSelected}
                 aria-required="true"
             />
