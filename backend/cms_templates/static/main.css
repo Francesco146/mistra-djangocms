@@ -24,3 +24,7 @@ a:focus {
 .content-wrapper:empty {
     display: none;
 }
+
+.skip-link-z {
+    z-index: 9999;
+}
