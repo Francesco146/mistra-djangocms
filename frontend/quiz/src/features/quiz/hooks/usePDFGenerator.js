@@ -5,6 +5,14 @@ import favicon from "@assets/images/favicon.png?inline";
 import jsPDF from "jspdf";
 import { useCallback } from "react";
 
+function stripHtml(html) {
+    if (!html) return "";
+    return html
+        .replace(/<[^>]*>/g, "")
+        .replace(/&nbsp;/g, " ")
+        .replace(/&amp;/g, "&");
+}
+
 export const usePDFGenerator = () => {
     const generatePDF = useCallback(
         (questions, selectedAnswers, executionId, age, sex) => {
@@ -66,14 +74,19 @@ export const usePDFGenerator = () => {
                         cursorY = margin;
                     }
 
+                    const questionText = stripHtml(q.name);
                     pdf.setFont(undefined, "bold");
-                    pdf.text(`Domanda ${idx + 1}: ${q.name}`, margin, cursorY);
+                    pdf.text(
+                        `Domanda ${idx + 1}: ${questionText}`,
+                        margin,
+                        cursorY
+                    );
                     cursorY += lineHeight;
 
                     const ans = q.answers.find(
                         (a) => a.id === selectedAnswers[q.id]
                     );
-                    const givenText = ans ? ans.text : "—";
+                    const givenText = ans ? stripHtml(ans.text) : "—";
                     pdf.setFont(undefined, "normal");
                     pdf.text(
                         `Risposta fornita: ${givenText}`,
