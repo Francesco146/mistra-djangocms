@@ -131,7 +131,7 @@ packaging==25.0
     #   build
     #   django-cms
     #   djangocms-text
-pillow==11.2.1
+pillow==11.3.0
     # via
     #   djangocms-text
     #   easy-thumbnails
